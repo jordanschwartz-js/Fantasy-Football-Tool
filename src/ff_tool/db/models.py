@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship, declarative_base, Session
+from sqlalchemy.orm import sessionmaker, relationship, DeclarativeBase, Session
 from typing import Any
 
-Base: Any = declarative_base()
+class Base(DeclarativeBase):
+    pass
 
 class Player(Base):
     __tablename__ = 'players'
