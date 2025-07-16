@@ -1,0 +1,4 @@
+[tool.poetry]
+league_id = "123456789"
+scoring = "ppr"
+db_path = "fantasy_football.db"

@@ -22,7 +22,7 @@ jobs:
         poetry run ruff .
     - name: Run type checker
       run: |
-        poetry run mypy .
+        poetry run mypy . --strict
     - name: Run tests
       run: |
         poetry run pytest
