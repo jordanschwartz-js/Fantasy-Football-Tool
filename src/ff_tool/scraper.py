@@ -2,9 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from sqlalchemy.orm import Session
-from .db.models import WeeklyRanking, get_session
+from .db.models import Player, Ranking, get_session
+from typing import List
 
-def scrape_fantasy_pros_position(week: int, position: str, scoring: str):
+def scrape_fantasy_pros_position(week: int, position: str, scoring: str) -> None:
     """
     Scrapes FantasyPros weekly rankings for a specific position and stores them in the database.
     """
@@ -34,22 +35,31 @@ def scrape_fantasy_pros_position(week: int, position: str, scoring: str):
         player_name = player_name_parts[0]
         team = player_name_parts[1] if len(player_name_parts) > 1 else "N/A"
 
-        ranking = WeeklyRanking(
+        player = session.query(Player).filter_by(name=player_name).first()
+        if not player:
+            player = Player(
+                name=player_name,
+                position=position.upper(),
+                team=team,
+                player_id=player_name
+            )
+            session.add(player)
+            session.commit()
+
+        ranking = Ranking(
             week=week,
-            scoring=scoring,
-            position=position.upper(),
-            player_name=player_name,
-            team=team,
-            projection=row.get("fpts", 0.0),
+            scoring_format=scoring,
+            projected_points=row.get("fpts", 0.0),
+            player_id=player.player_id
         )
         session.add(ranking)
     session.commit()
     session.close()
 
-def scrape_all_positions(week: int, scoring: str):
+def scrape_all_positions(week: int, scoring: str) -> None:
     """
     Scrapes FantasyPros weekly rankings for all positions and stores them in the database.
     """
-    positions = ["qb", "rb", "wr", "te", "dst", "k"]
+    positions: List[str] = ["qb", "rb", "wr", "te", "dst", "k"]
     for position in positions:
         scrape_fantasy_pros_position(week, position, scoring)

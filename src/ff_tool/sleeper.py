@@ -1,57 +1,49 @@
 import requests
-from .db.models import get_session, League, Roster, Player
+from .db.models import get_session, Roster, Player
+from sqlalchemy.orm import Session
+from typing import Any, Dict, List
 
 class Sleeper:
     def __init__(self, league_id: str):
         self.league_id = league_id
-        self.session = get_session()
+        self.session: Session = get_session()
 
-    def get_league(self):
+    def get_league(self) -> Dict[str, Any]:
         url = f"https://api.sleeper.app/v1/league/{self.league_id}"
         response = requests.get(url)
         response.raise_for_status()
-        return response.json()
+        return response.json()  # type: ignore
 
-    def get_rosters(self):
+    def get_rosters(self) -> List[Dict[str, Any]]:
         url = f"https://api.sleeper.app/v1/league/{self.league_id}/rosters"
         response = requests.get(url)
         response.raise_for_status()
-        return response.json()
+        return response.json()  # type: ignore
 
-    def sync_league(self):
-        league_data = self.get_league()
+    def sync_league(self) -> None:
         rosters_data = self.get_rosters()
-
-        league = self.session.query(League).filter_by(league_id=league_data["league_id"]).first()
-        if not league:
-            league = League(
-                league_id=league_data["league_id"],
-                name=league_data["name"],
-            )
-            self.session.add(league)
 
         for roster_data in rosters_data:
             owner_id = roster_data.get("owner_id")
             if not owner_id:
                 continue
-            roster = self.session.query(Roster).filter_by(roster_id=roster_data["roster_id"], league_id=league_data["league_id"]).first()
-            if not roster:
-                roster = Roster(
-                    roster_id=roster_data["roster_id"],
-                    owner_id=owner_id,
-                    league_id=league_data["league_id"],
-                )
-                self.session.add(roster)
 
-            # Clear existing players for this roster
-            self.session.query(Player).filter_by(roster_id=roster.id).delete()
-
-            if roster_data.get("players"):
-                for player_id in roster_data["players"]:
+            for player_id in roster_data.get("players", []):
+                player = self.session.query(Player).filter_by(player_id=player_id).first()
+                if not player:
                     player = Player(
                         player_id=player_id,
-                        roster_id=roster.id
+                        name="Unknown",
+                        position="Unknown",
+                        team="Unknown"
                     )
                     self.session.add(player)
+
+                roster = Roster(
+                    league_id=self.league_id,
+                    user_id=owner_id,
+                    player_id=player_id,
+                )
+                self.session.add(roster)
         self.session.commit()
         self.session.close()

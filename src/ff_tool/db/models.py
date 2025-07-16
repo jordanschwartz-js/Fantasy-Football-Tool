@@ -1,48 +1,58 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship, declarative_base
+from sqlalchemy.orm import sessionmaker, relationship, declarative_base, Session
+from typing import Any
 
-Base = declarative_base()
-
-class WeeklyRanking(Base):
-    __tablename__ = 'weekly_rankings'
-
-    id = Column(Integer, primary_key=True)
-    week = Column(Integer, nullable=False)
-    scoring = Column(String, nullable=False)
-    position = Column(String, nullable=False)
-    player_name = Column(String, nullable=False)
-    team = Column(String, nullable=False)
-    projection = Column(Float, nullable=False)
-
-    def __repr__(self):
-        return f"<WeeklyRanking(week={self.week}, scoring='{self.scoring}', position='{self.position}', player_name='{self.player_name}', projection={self.projection})>"
-
-class League(Base):
-    __tablename__ = 'leagues'
-    id = Column(Integer, primary_key=True)
-    league_id = Column(String, unique=True, nullable=False)
-    name = Column(String, nullable=False)
-    rosters = relationship("Roster", back_populates="league")
-
-class Roster(Base):
-    __tablename__ = 'rosters'
-    id = Column(Integer, primary_key=True)
-    roster_id = Column(Integer, nullable=False)
-    owner_id = Column(String, nullable=False)
-    league_id = Column(String, ForeignKey('leagues.league_id'))
-    league = relationship("League", back_populates="rosters")
-    players = relationship("Player", back_populates="roster")
-
+Base: Any = declarative_base()
 
 class Player(Base):
     __tablename__ = 'players'
     id = Column(Integer, primary_key=True)
-    player_id = Column(String, nullable=False)
-    roster_id = Column(Integer, ForeignKey('rosters.id'))
-    roster = relationship("Roster", back_populates="players")
+    player_id = Column(String, unique=True, nullable=False)
+    name = Column(String, nullable=False)
+    position = Column(String, nullable=False)
+    team = Column(String, nullable=False)
+
+    def __repr__(self) -> str:
+        return f"<Player(name='{self.name}', position='{self.position}', team='{self.team}')>"
+
+class Ranking(Base):
+    __tablename__ = 'rankings'
+    id = Column(Integer, primary_key=True)
+    player_id = Column(String, ForeignKey('players.player_id'), nullable=False)
+    week = Column(Integer, nullable=False)
+    scoring_format = Column(String, nullable=False)
+    projected_points = Column(Float, nullable=False)
+    player = relationship("Player")
+
+    def __repr__(self) -> str:
+        return f"<Ranking(player_id='{self.player_id}', week={self.week}, projected_points={self.projected_points})>"
+
+class Roster(Base):
+    __tablename__ = 'rosters'
+    id = Column(Integer, primary_key=True)
+    league_id = Column(String, nullable=False)
+    user_id = Column(String, nullable=False)
+    player_id = Column(String, ForeignKey('players.player_id'), nullable=False)
+    player = relationship("Player")
+
+    def __repr__(self) -> str:
+        return f"<Roster(league_id='{self.league_id}', user_id='{self.user_id}', player_id='{self.player_id}')>"
+
+class Matchup(Base):
+    __tablename__ = 'matchups'
+    id = Column(Integer, primary_key=True)
+    week = Column(Integer, nullable=False)
+    league_id = Column(String, nullable=False)
+    roster_id_1 = Column(Integer, ForeignKey('rosters.id'), nullable=False)
+    roster_id_2 = Column(Integer, ForeignKey('rosters.id'), nullable=False)
+    roster_1 = relationship("Roster", foreign_keys=[roster_id_1])
+    roster_2 = relationship("Roster", foreign_keys=[roster_id_2])
+
+    def __repr__(self) -> str:
+        return f"<Matchup(week={self.week}, league_id='{self.league_id}')>"
 
 
-def get_session(db_path='fantasy_football.db'):
+def get_session(db_path: str = 'fantasy_football.db') -> Session:
     engine = create_engine(f'sqlite:///{db_path}')
     Base.metadata.create_all(engine)
     DBSession = sessionmaker(bind=engine)
