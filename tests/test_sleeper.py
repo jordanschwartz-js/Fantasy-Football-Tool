@@ -20,12 +20,9 @@ def sleeper_rosters_data() -> List[Dict[str, Any]]:
     ]
 
 def test_sync_league(sleeper_rosters_data: List[Dict[str, Any]]) -> None:
-    # Mock the responses from requests.get
-    mock_rosters_response = MagicMock()
-    mock_rosters_response.json.return_value = sleeper_rosters_data
-
-    with patch("requests.get") as mock_get:
-        mock_get.return_value = mock_rosters_response
+    # Mock the responses from ff_tool.net.get
+    with patch("ff_tool.net.session.get") as mock_get:
+        mock_get.return_value.json.return_value = sleeper_rosters_data
 
         # Use an in-memory SQLite database for testing
         session = get_session(db_path=":memory:")
