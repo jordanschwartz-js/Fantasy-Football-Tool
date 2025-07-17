@@ -6,6 +6,10 @@ class Config(BaseModel):
     league_id: Optional[str] = None
     scoring: Optional[str] = 'ppr'
     db_path: Optional[str] = 'fantasy_football.db'
+    cache_path: Optional[str] = '.ff_cache.sqlite'
+    cache_expiry_hours: Optional[int] = 24
+    retries: Optional[int] = 3
+    backoff_factor: Optional[int] = 1
 
 def get_config(config_path: str = 'ff_tool.toml') -> Config:
     try:

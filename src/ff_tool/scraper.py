@@ -1,16 +1,16 @@
-import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from sqlalchemy.orm import Session
 from .db.models import Player, Ranking, get_session
 from typing import List
+from ff_tool.net import get
 
 def scrape_fantasy_pros_position(week: int, position: str, scoring: str) -> None:
     """
     Scrapes FantasyPros weekly rankings for a specific position and stores them in the database.
     """
     url = f"https://www.fantasypros.com/nfl/projections/{position.lower()}.php?week={week}&scoring={scoring.upper()}"
-    response = requests.get(url)
+    response = get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     table = soup.find("table", {"id": "data"})
     if not table:
