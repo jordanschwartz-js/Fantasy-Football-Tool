@@ -35,3 +35,7 @@ The data is stored in a SQLite database file named `fantasy_football.db`. You ca
 ```bash
 sqlite3 fantasy_football.db
 ```
+
+### Network Design
+
+The `ff_tool.net` module uses a cached session to avoid hitting the network for repeated requests. However, the scraper in `ff_tool.scraper` intentionally uses a direct `requests.get` call to allow for easier mocking in unit tests. This ensures that the tests can run without hitting the network.

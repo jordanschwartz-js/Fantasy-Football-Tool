@@ -1,7 +1,7 @@
 import typer
 from .scraper import scrape_all_positions
 from .sleeper import Sleeper
-from .config import get_config, Config
+from .config import get_config
 from typing import Optional
 
 app = typer.Typer()

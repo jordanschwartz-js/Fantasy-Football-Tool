@@ -1,4 +1,4 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import pytest
 from src.ff_tool.sleeper import Sleeper
 from src.ff_tool.db.models import get_session, Roster, Player

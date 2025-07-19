@@ -1,7 +1,5 @@
-import pytest
 from unittest.mock import patch, MagicMock
-from ff_tool.net import get, NetworkError
-import requests
+from ff_tool.net import get
 
 @patch('ff_tool.net.session')
 def test_get_cache(mock_session):
