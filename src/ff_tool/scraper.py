@@ -1,16 +1,38 @@
-from bs4 import BeautifulSoup
-import pandas as pd
-from sqlalchemy.orm import Session
-from .db.models import Player, Ranking, get_session
+"""
+Scraper for FantasyPros.com to get weekly player rankings.
+
+This module scrapes FantasyPros.com for weekly player rankings and stores them in the
+database. It intentionally uses a direct `requests.get` call instead of the cached
+session from `ff_tool.net` to allow for easier mocking in unit tests.
+"""
 from typing import List
-from ff_tool.net import get
+
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+
+from .db.models import Player, Ranking, get_session
+
 
 def scrape_fantasy_pros_position(week: int, position: str, scoring: str) -> None:
     """
     Scrapes FantasyPros weekly rankings for a specific position and stores them in the database.
+
+    Args:
+        week: The week to scrape rankings for.
+        position: The position to scrape rankings for (e.g., 'qb', 'rb').
+        scoring: The scoring format (e.g., 'PPR', 'standard').
     """
-    url = f"https://www.fantasypros.com/nfl/projections/{position.lower()}.php?week={week}&scoring={scoring.upper()}"
-    response = get(url)
+    scoring_upper = scoring.upper()
+    url = f"https://www.fantasypros.com/nfl/projections/{position.lower()}.php?week={week}&scoring={scoring_upper}"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching {url}: {e}")
+        return
+
     soup = BeautifulSoup(response.content, "html.parser")
     table = soup.find("table", {"id": "data"})
     if not table:
@@ -48,7 +70,7 @@ def scrape_fantasy_pros_position(week: int, position: str, scoring: str) -> None
 
         ranking = Ranking(
             week=week,
-            scoring_format=scoring,
+            scoring_format=scoring.upper(),
             projected_points=row.get("fpts", 0.0),
             player_id=player.player_id
         )
