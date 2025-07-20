@@ -31,5 +31,29 @@ def sleeper_sync(
     sleeper.sync_league()
     print(f"Successfully synced league {league_id}.")
 
+
+@app.command()
+def trade(
+    you_send: str = typer.Argument(..., help="Comma-separated list of player names you send"),
+    for_trade: str = typer.Option(..., "--for", help="Comma-separated list of player names you get"),
+) -> None:
+    """
+    Analyze a fantasy football trade.
+    """
+    from .trade import analyze_trade
+
+    assets_out = [p.strip() for p in you_send.split(',')]
+    assets_in = [p.strip() for p in for_trade.split(',')]
+
+    analysis = analyze_trade(assets_out, assets_in)
+
+    print("Trade Analysis:")
+    print(f"  You send: {', '.join(analysis['assets_out']['players'])}")
+    print(f"  You get: {', '.join(analysis['assets_in']['players'])}")
+    print(f"  Point differential: {analysis['delta']:.2f}")
+    print(f"  Percentage change: {analysis['percentage_change']:.2f}%")
+    print(f"  Recommendation: {analysis['recommendation']}")
+
+
 if __name__ == "__main__":
     app()

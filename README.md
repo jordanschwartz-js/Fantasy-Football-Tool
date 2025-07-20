@@ -39,3 +39,11 @@ sqlite3 fantasy_football.db
 ### Network Design
 
 The `ff_tool.net` module uses a cached session to avoid hitting the network for repeated requests. However, the scraper in `ff_tool.scraper` intentionally uses a direct `requests.get` call to allow for easier mocking in unit tests. This ensures that the tests can run without hitting the network.
+
+### Trade Analyzer
+
+To analyze a trade, use the `trade` command. You can provide comma-separated lists of player names for what you are sending and what you are getting.
+
+```bash
+poetry run ff-tool trade "Player A,Player B" --for "Player C,Player D"
+```
