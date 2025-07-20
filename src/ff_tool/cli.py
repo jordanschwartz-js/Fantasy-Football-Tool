@@ -55,5 +55,29 @@ def trade(
     print(f"  Recommendation: {analysis['recommendation']}")
 
 
+@app.command()
+def waiver(
+    week: int,
+    budget: int,
+    league_id: Optional[str] = typer.Option(config.league_id, help="Sleeper league ID"),
+) -> None:
+    """
+    Get waiver wire recommendations.
+    """
+    from .waiver import recommend_waivers
+
+    if not league_id:
+        raise typer.BadParameter("league_id is required. Provide it via CLI or config file.")
+
+    recommendations = recommend_waivers(league_id, week, budget)
+
+    print("Waiver Wire Recommendations:")
+    for rec in recommendations:
+        print(
+            f"  - {rec['player_name']} ({rec['position']}, {rec['team']}): "
+            f"Score={rec['score']:.2f}, Bid=${rec['bid']}"
+        )
+
+
 if __name__ == "__main__":
     app()
