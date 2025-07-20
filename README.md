@@ -12,6 +12,7 @@ A toolkit for fantasy football.
     ```bash
     poetry install
     ```
+    The tool uses `pulp` for optimization and `requests-cache` for caching, which may have system-level dependencies. Please see their documentation for installation instructions.
 
 ## Usage
 
@@ -46,4 +47,12 @@ To analyze a trade, use the `trade` command. You can provide comma-separated lis
 
 ```bash
 poetry run ff-tool trade "Player A,Player B" --for "Player C,Player D"
+```
+
+### Waiver-Wire Recommender
+
+To get waiver-wire recommendations, use the `waiver` command.
+
+```bash
+poetry run ff-tool waiver --week 4 --budget 100 --league-id YOUR_LEAGUE_ID
 ```
