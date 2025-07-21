@@ -10,6 +10,11 @@ class Config(BaseModel):
     cache_expiry_hours: Optional[int] = 24
     retries: Optional[int] = 3
     backoff_factor: Optional[int] = 1
+    webhook_url: Optional[str] = None
+    current_week: Optional[int] = 1
+    faab_budget: Optional[int] = 100
+    post_day: Optional[str] = "tue"
+    post_hour: Optional[int] = 8
 
 def get_config(config_path: str = 'ff_tool.toml') -> Config:
     try:

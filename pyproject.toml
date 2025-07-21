@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fantasy-football-tool"
-version = "0.1.0"
+version = "0.6.0"
 description = "A toolkit for fantasy football."
 authors = ["Jules <agent@email.com>"]
 packages = [{include = "ff_tool", from = "src"}]
@@ -27,6 +27,8 @@ pytest-cov = "^6.2.1"
 loguru = "^0.7.3"
 mkdocs = "^1.6.1"
 mkdocs-material = "^9.6.15"
+slack-sdk = "^3.36.0"
+apscheduler = "^3.11.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.4.3"
