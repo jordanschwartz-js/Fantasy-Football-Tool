@@ -79,6 +79,16 @@ def waiver(
         )
 
 
+@app.command()
+def bot() -> None:
+    """
+    Run the waiver wire bot.
+    """
+    from .bot import run_bot
+
+    run_bot()
+
+
 if __name__ == "__main__":
     from .logger import setup_logger
 
