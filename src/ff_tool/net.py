@@ -1,5 +1,6 @@
 import requests
 from requests_cache import CachedSession
+from loguru import logger
 
 from ff_tool.config import get_config
 
@@ -24,7 +25,12 @@ session = CachedSession(
 def get(url: str, **kwargs) -> requests.Response:
     try:
         response = session.get(url, **kwargs)
+        if response.from_cache:
+            logger.info(f"Cache hit for {url}")
+        else:
+            logger.info(f"Cache miss for {url}")
         response.raise_for_status()
         return response
     except requests.exceptions.RequestException as e:
+        logger.error(f"Failed to fetch {url}: {e}")
         raise NetworkError(f"Failed to fetch {url}") from e

@@ -2,6 +2,8 @@
 
 A toolkit for fantasy football.
 
+For full documentation, please visit the [documentation site](https://<org>.github.io/Fantasy-Football-Tool/).
+
 ## Setup
 
 1.  Clone the repository:
