@@ -1,0 +1,5 @@
+site_name: Fantasy Football Tool
+theme:
+  name: material
+nav:
+  - Home: index.md

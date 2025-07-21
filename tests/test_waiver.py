@@ -1,7 +1,30 @@
 from unittest.mock import patch
 
 from src.ff_tool.db.models import Player
-from src.ff_tool.waiver import recommend_waivers
+from src.ff_tool.waiver import recommend_waivers, get_free_agents
+
+
+def test_get_free_agents() -> None:
+    """Test getting free agents from the Sleeper API."""
+    # Mock players
+    player1 = Player(player_id="1", name="Player A", position="RB", team="TEAM1")
+    player2 = Player(player_id="2", name="Player B", position="WR", team="TEAM1")
+    player3 = Player(player_id="3", name="Player C", position="QB", team="TEAM2")
+
+    with patch("src.ff_tool.waiver.get_session") as mock_get_session:
+        mock_session = mock_get_session.return_value
+        mock_session.query.return_value.all.return_value = [player1, player2, player3]
+
+        with patch("src.ff_tool.waiver.Sleeper") as mock_sleeper:
+            mock_sleeper.return_value.get_rosters.return_value = [
+                {"players": ["1"]},
+                {"players": ["2"]},
+            ]
+
+            free_agents = get_free_agents(league_id="123")
+
+            assert len(free_agents) == 1
+            assert free_agents[0].name == "Player C"
 
 
 def test_recommend_waivers() -> None:

@@ -80,4 +80,7 @@ def waiver(
 
 
 if __name__ == "__main__":
+    from .logger import setup_logger
+
+    setup_logger()
     app()
