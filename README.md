@@ -1,5 +1,8 @@
 # Fantasy Football Tool
 
+[![codecov](https://codecov.io/gh/<org>/<repo>/branch/main/graph/badge.svg)](https://codecov.io/gh/<org>/<repo>)
+[![Documentation Status](https://readthedocs.org/projects/<repo>/badge/?version=latest)](https://<repo>.readthedocs.io/en/latest/?badge=latest)
+
 A toolkit for fantasy football.
 
 For full documentation, please visit the [documentation site](https://<org>.github.io/Fantasy-Football-Tool/).

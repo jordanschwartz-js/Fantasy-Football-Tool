@@ -56,6 +56,8 @@ def recommend_waivers(
     """
     session = get_session()
     free_agents = get_free_agents(league_id)
+    if not free_agents:
+        return []
     recommendations = []
 
     for player in free_agents:

@@ -15,8 +15,12 @@ class Sleeper:
 
     def get_rosters(self) -> List[Dict[str, Any]]:
         url = f"https://api.sleeper.app/v1/league/{self.league_id}/rosters"
-        response = get(url)
-        return response.json()
+        try:
+            response = get(url)
+            data = response.json()
+            return data if data else []
+        except Exception:
+            return []
 
     def sync_league(self) -> None:
         rosters_data = self.get_rosters()
