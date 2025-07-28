@@ -1,6 +1,6 @@
 from .db.models import get_session, Roster, Player
 from sqlalchemy.orm import Session
-from typing import Any, Dict, List
+from typing import Any
 from ff_tool.net import get
 
 class Sleeper:
@@ -8,15 +8,15 @@ class Sleeper:
         self.league_id = league_id
         self.session: Session = get_session()
 
-    def get_league(self) -> Dict[str, Any]:
+    def get_league(self) -> dict[str, Any]:
         url = f"https://api.sleeper.app/v1/league/{self.league_id}"
         response = get(url)
-        return response.json()
+        return response.json()  # type: ignore
 
-    def get_rosters(self) -> List[Dict[str, Any]]:
+    def get_rosters(self) -> list[dict[str, Any]]:
         url = f"https://api.sleeper.app/v1/league/{self.league_id}/rosters"
         response = get(url)
-        return response.json()
+        return response.json()  # type: ignore
 
     def sync_league(self) -> None:
         rosters_data = self.get_rosters()

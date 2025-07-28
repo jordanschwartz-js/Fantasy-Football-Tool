@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.coverage
+*.sqlite
+logs/
+.ff_cache.sqlite
