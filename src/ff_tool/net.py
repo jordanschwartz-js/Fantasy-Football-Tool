@@ -1,5 +1,5 @@
 from typing import Any
-import requests
+import requests  # type: ignore
 from requests_cache import CachedSession
 from loguru import logger
 

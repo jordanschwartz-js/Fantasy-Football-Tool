@@ -8,7 +8,7 @@ session from `ff_tool.net` to allow for easier mocking in unit tests.
 from typing import List
 
 import pandas as pd
-import requests
+import requests  # type: ignore
 from bs4 import BeautifulSoup
 
 from .db.models import Player, Ranking, get_session

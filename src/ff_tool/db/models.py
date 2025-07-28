@@ -5,7 +5,7 @@ from typing import Any
 
 Base: Any = declarative_base()
 
-class Player(Base):
+class Player(Base): # type: ignore
     __tablename__ = 'players'
     id = Column(Integer, primary_key=True)
     player_id = Column(String, unique=True, nullable=False)
@@ -16,7 +16,7 @@ class Player(Base):
     def __repr__(self) -> str:
         return f"<Player(name='{self.name}', position='{self.position}', team='{self.team}')>"
 
-class Ranking(Base):
+class Ranking(Base): # type: ignore
     __tablename__ = 'rankings'
     id = Column(Integer, primary_key=True)
     player_id = Column(String, ForeignKey('players.player_id'), nullable=False)
@@ -28,7 +28,7 @@ class Ranking(Base):
     def __repr__(self) -> str:
         return f"<Ranking(player_id='{self.player_id}', week={self.week}, projected_points={self.projected_points})>"
 
-class Roster(Base):
+class Roster(Base): # type: ignore
     __tablename__ = 'rosters'
     id = Column(Integer, primary_key=True)
     league_id = Column(String, nullable=False)
@@ -39,7 +39,7 @@ class Roster(Base):
     def __repr__(self) -> str:
         return f"<Roster(league_id='{self.league_id}', user_id='{self.user_id}', player_id='{self.player_id}')>"
 
-class Matchup(Base):
+class Matchup(Base): # type: ignore
     __tablename__ = 'matchups'
     id = Column(Integer, primary_key=True)
     week = Column(Integer, nullable=False)
