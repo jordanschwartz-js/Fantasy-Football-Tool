@@ -1,0 +1,21 @@
+src/ff_tool/db/models.py:8: error: Variable "ff_tool.db.models.Base" is not valid as a type  [valid-type]
+src/ff_tool/db/models.py:8: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#variables-vs-type-aliases
+src/ff_tool/db/models.py:8: error: Invalid base class "Base"  [misc]
+src/ff_tool/db/models.py:19: error: Variable "ff_tool.db.models.Base" is not valid as a type  [valid-type]
+src/ff_tool/db/models.py:19: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#variables-vs-type-aliases
+src/ff_tool/db/models.py:19: error: Invalid base class "Base"  [misc]
+src/ff_tool/db/models.py:31: error: Variable "ff_tool.db.models.Base" is not valid as a type  [valid-type]
+src/ff_tool/db/models.py:31: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#variables-vs-type-aliases
+src/ff_tool/db/models.py:31: error: Invalid base class "Base"  [misc]
+src/ff_tool/db/models.py:42: error: Variable "ff_tool.db.models.Base" is not valid as a type  [valid-type]
+src/ff_tool/db/models.py:42: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#variables-vs-type-aliases
+src/ff_tool/db/models.py:42: error: Invalid base class "Base"  [misc]
+src/ff_tool/net.py:19: error: Argument 1 to "CachedSession" has incompatible type "str | None"; expected "Path | str"  [arg-type]
+src/ff_tool/waiver.py:78: error: Argument "key" to "sort" of "list" has incompatible type "Callable[[dict[str, object]], object]"; expected "Callable[[dict[str, object]], SupportsDunderLT[Any] | SupportsDunderGT[Any]]"  [arg-type]
+src/ff_tool/waiver.py:78: error: Incompatible return value type (got "object", expected "SupportsDunderLT[Any] | SupportsDunderGT[Any]")  [return-value]
+src/ff_tool/cli.py:10: error: Unused "type: ignore" comment  [unused-ignore]
+src/ff_tool/cli.py:21: error: Unused "type: ignore" comment  [unused-ignore]
+src/ff_tool/cli.py:35: error: Unused "type: ignore" comment  [unused-ignore]
+src/ff_tool/cli.py:58: error: Unused "type: ignore" comment  [unused-ignore]
+src/ff_tool/cli.py:82: error: Unused "type: ignore" comment  [unused-ignore]
+Found 16 errors in 4 files (checked 12 source files)

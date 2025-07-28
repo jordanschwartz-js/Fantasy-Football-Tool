@@ -1,3 +1,4 @@
+from typing import Any
 import requests
 from requests_cache import CachedSession
 from loguru import logger
@@ -10,8 +11,8 @@ class NetworkError(Exception):
 
 
 config = get_config()
-CACHE_PATH = config.cache_path
-CACHE_EXPIRY = config.cache_expiry_hours * 60 * 60
+CACHE_PATH = config.cache_path if config.cache_path else ".ff_cache"
+CACHE_EXPIRY = (config.cache_expiry_hours or 1) * 60 * 60
 
 
 session = CachedSession(
@@ -22,7 +23,7 @@ session = CachedSession(
 )
 
 
-def get(url: str, **kwargs) -> requests.Response:
+def get(url: str, **kwargs: Any) -> requests.Response:
     try:
         response = session.get(url, **kwargs)
         if response.from_cache:
