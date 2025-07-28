@@ -7,6 +7,7 @@ packages = [{include = "ff_tool", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+sqlalchemy = "^2.0.23"
 requests = "^2.31.0"
 beautifulsoup4 = "^4.12.2"
 pandas = "^2.0.3"
@@ -45,7 +46,6 @@ build-backend = "poetry.core.masonry.api"
 [tool.mypy]
 strict = true
 ignore_missing_imports = true
-plugins = ["sqlalchemy.ext.mypy.plugin"]
 
 [[tool.mypy.overrides]]
 module = "ff_tool.cli"

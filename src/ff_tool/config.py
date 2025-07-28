@@ -1,8 +1,8 @@
-import toml
+import toml  # type: ignore
 from pydantic import BaseModel
 from typing import Optional
 
-class Config(BaseModel):
+class Config(BaseModel):  # type: ignore
     league_id: Optional[str] = None
     scoring: Optional[str] = 'ppr'
     db_path: Optional[str] = 'fantasy_football.db'

@@ -75,6 +75,6 @@ def recommend_waivers(
             }
         )
 
-    recommendations.sort(key=lambda x: x["score"], reverse=True)  # type: ignore
+    recommendations.sort(key=lambda x: x["score"], reverse=True)
     session.close()
     return recommendations
