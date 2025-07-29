@@ -1,5 +1,8 @@
 # Fantasy Football Tool
 
+[![codecov](https://codecov.io/gh/<org>/fantasy-football-tool/branch/main/graph/badge.svg?token=YOUR_CODECOV_TOKEN)](https://codecov.io/gh/<org>/fantasy-football-tool)
+[![Docs](https://github.com/<org>/fantasy-football-tool/actions/workflows/docs-deploy.yml/badge.svg)](https://github.com/<org>/fantasy-football-tool/actions/workflows/docs-deploy.yml)
+
 A toolkit for fantasy football.
 
 For full documentation, please visit the [documentation site](https://<org>.github.io/Fantasy-Football-Tool/).

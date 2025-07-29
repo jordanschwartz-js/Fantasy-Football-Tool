@@ -2,8 +2,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from src.ff_tool.db.models import Player, Ranking, get_session
-from src.ff_tool.scraper import scrape_fantasy_pros_position
+from ff_tool.db.models import Player, Ranking, get_session
+from ff_tool.scraper import scrape_fantasy_pros_position
 
 
 @pytest.fixture
@@ -19,9 +19,9 @@ def test_scrape_fantasy_pros_position(fantasypros_html: str) -> None:
     mock_response.content = fantasypros_html
     mock_response.raise_for_status.return_value = None
 
-    with patch("src.ff_tool.scraper.requests.get", return_value=mock_response) as mock_get:
+    with patch("ff_tool.scraper.requests.get", return_value=mock_response) as mock_get:
         session = get_session(db_path=":memory:")
-        with patch("src.ff_tool.scraper.get_session", return_value=session):
+        with patch("ff_tool.scraper.get_session", return_value=session):
             scrape_fantasy_pros_position(week=1, position="qb", scoring="PPR")
 
             # Verify that the correct URL was called

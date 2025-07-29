@@ -1,8 +1,8 @@
-from unittest.mock import patch, MagicMock
 from typing import Any
+from unittest.mock import MagicMock, patch
 
-from src.ff_tool.db.models import Player, Ranking
-from src.ff_tool.trade import analyze_trade
+from ff_tool.db.models import Player, Ranking
+from ff_tool.trade import analyze_trade
 
 
 def test_analyze_trade() -> None:
@@ -19,7 +19,7 @@ def test_analyze_trade() -> None:
     ranking3 = Ranking(player_id="3", week=1, projected_points=25.0, scoring_format="PPR")
     ranking4 = Ranking(player_id="4", week=1, projected_points=10.0, scoring_format="PPR")
 
-    with patch("src.ff_tool.trade.get_session") as mock_get_session:
+    with patch("ff_tool.trade.get_session") as mock_get_session:
         # Mock the session and query results
         mock_session = mock_get_session.return_value
         def mock_query_func(model: Any) -> MagicMock:

@@ -1,7 +1,11 @@
-from .db.models import get_session, Roster, Player
-from sqlalchemy.orm import Session
 from typing import Any
+
+from sqlalchemy.orm import Session
+
 from ff_tool.net import get
+
+from .db.models import Player, Roster, get_session
+
 
 class Sleeper:
     def __init__(self, league_id: str):

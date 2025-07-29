@@ -1,6 +1,12 @@
-import toml  # type: ignore
-from pydantic import BaseModel
+import os
+from pathlib import Path
 from typing import Optional
+
+import toml
+from pydantic import BaseModel
+
+DEFAULT_CFG = Path.home() / ".config" / "ff_tool.toml"
+_ENV = "FF_TOOL_CONFIG"
 
 class Config(BaseModel):  # type: ignore
     league_id: Optional[str] = None
@@ -16,10 +22,19 @@ class Config(BaseModel):  # type: ignore
     post_day: Optional[str] = "tue"
     post_hour: Optional[int] = 8
 
-def get_config(config_path: str = 'ff_tool.toml') -> Config:
-    try:
-        with open(config_path, 'r') as f:
-            config_data = toml.load(f)
-        return Config(**config_data.get('tool', {}).get('poetry', {}))
-    except FileNotFoundError:
+def cfg_path() -> Path:
+    """Return the location of the active config file.
+
+    Order of precedence:
+    1. Environment variable FF_TOOL_CONFIG
+    2. Default file in ~/.config
+    """
+    return Path(os.getenv(_ENV, DEFAULT_CFG))
+
+def get_config() -> Config:
+    path = cfg_path()
+    if not path.is_file():
         return Config()
+    with open(path, "r") as f:
+        data = toml.load(f)
+    return Config(**data.get("tool", {}).get("poetry", {}))

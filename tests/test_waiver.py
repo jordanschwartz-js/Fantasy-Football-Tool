@@ -1,7 +1,7 @@
 from unittest.mock import patch
 
-from src.ff_tool.db.models import Player
-from src.ff_tool.waiver import recommend_waivers, get_free_agents
+from ff_tool.db.models import Player
+from ff_tool.waiver import get_free_agents, recommend_waivers
 
 
 def test_get_free_agents() -> None:
@@ -11,11 +11,11 @@ def test_get_free_agents() -> None:
     player2 = Player(player_id="2", name="Player B", position="WR", team="TEAM1")
     player3 = Player(player_id="3", name="Player C", position="QB", team="TEAM2")
 
-    with patch("src.ff_tool.waiver.get_session") as mock_get_session:
+    with patch("ff_tool.waiver.get_session") as mock_get_session:
         mock_session = mock_get_session.return_value
         mock_session.query.return_value.all.return_value = [player1, player2, player3]
 
-        with patch("src.ff_tool.waiver.Sleeper") as mock_sleeper:
+        with patch("ff_tool.waiver.Sleeper") as mock_sleeper:
             mock_sleeper.return_value.get_rosters.return_value = [
                 {"players": ["1"]},
                 {"players": ["2"]},
@@ -36,8 +36,8 @@ def test_recommend_waivers() -> None:
     # Mock free agents
     free_agents = [player3, player4]
 
-    with patch("src.ff_tool.waiver.get_free_agents", return_value=free_agents):
-        with patch("src.ff_tool.waiver.get_ros_projected_points") as mock_get_ros:
+    with patch("ff_tool.waiver.get_free_agents", return_value=free_agents):
+        with patch("ff_tool.waiver.get_ros_projected_points") as mock_get_ros:
             # Mock ROS projected points
             mock_get_ros.side_effect = [25.0, 10.0]
 

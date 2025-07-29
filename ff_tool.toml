@@ -1,3 +1,6 @@
+[bot]
+schedule = "Tue 08:00"
+
 [tool.poetry]
 league_id = "123456789"
 scoring = "ppr"

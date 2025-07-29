@@ -1,8 +1,11 @@
-from unittest.mock import patch
-import pytest
-from src.ff_tool.sleeper import Sleeper
-from src.ff_tool.db.models import get_session, Roster, Player
 from typing import Any, Dict, List
+from unittest.mock import patch
+
+import pytest
+
+from ff_tool.db.models import Player, Roster, get_session
+from ff_tool.sleeper import Sleeper
+
 
 @pytest.fixture
 def sleeper_rosters_data() -> List[Dict[str, Any]]:
@@ -27,7 +30,7 @@ def test_sync_league(sleeper_rosters_data: List[Dict[str, Any]]) -> None:
         # Use an in-memory SQLite database for testing
         session = get_session(db_path=":memory:")
 
-        with patch("src.ff_tool.sleeper.get_session", return_value=session):
+        with patch("ff_tool.sleeper.get_session", return_value=session):
             sleeper = Sleeper("12345")
             sleeper.sync_league()
 

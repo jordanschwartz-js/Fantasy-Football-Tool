@@ -1,7 +1,7 @@
-from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
-from sqlalchemy.orm import sessionmaker, declarative_base, relationship, Session, Mapped
-
 from typing import Any
+
+from sqlalchemy import Column, Float, ForeignKey, Integer, String, create_engine
+from sqlalchemy.orm import Mapped, Session, declarative_base, relationship, sessionmaker
 
 Base: Any = declarative_base()
 

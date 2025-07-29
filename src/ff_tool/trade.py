@@ -3,7 +3,7 @@ Trade analyzer module.
 
 This module provides functions for analyzing fantasy football trades.
 """
-from typing import Dict, List, Any
+from typing import Any, Dict, List
 
 from sqlalchemy.orm import Session
 

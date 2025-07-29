@@ -1,11 +1,18 @@
-import typer
-from .scraper import scrape_all_positions
-from .sleeper import Sleeper
-from .config import get_config
 from typing import Optional
 
+import typer
+
+import ff_tool.config as cfg
+from ff_tool.bot.cli import app as bot_app
+from ff_tool.scraper import scrape_all_positions
+from ff_tool.sleeper import Sleeper
+
 app = typer.Typer()
-config = get_config()
+config = cfg.get_config()
+
+@app.callback()
+def main():
+    pass
 
 @app.command()
 def scraper(
@@ -40,7 +47,7 @@ def trade(
     """
     Analyze a fantasy football trade.
     """
-    from .trade import analyze_trade
+    from ff_tool.trade import analyze_trade
 
     assets_out = [p.strip() for p in you_send.split(',')]
     assets_in = [p.strip() for p in for_trade.split(',')]
@@ -64,7 +71,7 @@ def waiver(
     """
     Get waiver wire recommendations.
     """
-    from .waiver import recommend_waivers
+    from ff_tool.waiver import recommend_waivers
 
     if not league_id:
         raise typer.BadParameter("league_id is required. Provide it via CLI or config file.")
@@ -78,19 +85,19 @@ def waiver(
             f"Score={rec['score']:.2f}, Bid=${rec['bid']}"
         )
 
+app.add_typer(bot_app, name="bot")
 
 @app.command()
-def bot() -> None:
+def doctor():
     """
-    Run the waiver wire bot.
+    Checks the user's setup and prints a report.
     """
-    from .bot import run_bot
-
-    run_bot()
+    from ff_tool.doctor import run_doctor
+    run_doctor()
 
 
 if __name__ == "__main__":
-    from .logger import setup_logger
+    from ff_tool.logger import setup_logger
 
     setup_logger()
     app()
