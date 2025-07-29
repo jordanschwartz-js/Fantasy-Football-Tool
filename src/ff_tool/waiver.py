@@ -3,10 +3,10 @@ Waiver wire recommender module.
 
 This module provides functions for recommending waiver wire pickups.
 """
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
-from .sleeper import Sleeper
 from .db.models import Player, get_session
+from .sleeper import Sleeper
 from .trade import get_ros_projected_points
 
 

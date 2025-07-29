@@ -1,7 +1,8 @@
-from slack_sdk.webhook import WebhookClient
 from apscheduler.schedulers.blocking import BlockingScheduler
-from .config import get_config
-from .waiver import recommend_waivers
+from slack_sdk.webhook import WebhookClient
+
+from ff_tool.config import get_config
+from ff_tool.waiver import recommend_waivers
 
 
 def send_waiver_recommendations() -> None:

@@ -1,7 +1,8 @@
 from typing import Any
-import requests  # type: ignore
-from requests_cache import CachedSession
+
+import requests
 from loguru import logger
+from requests_cache import CachedSession
 
 from ff_tool.config import get_config
 

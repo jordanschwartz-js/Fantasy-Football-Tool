@@ -1,5 +1,7 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
 from ff_tool.net import get
+
 
 @patch('ff_tool.net.session')
 def test_get_cache(mock_session):
