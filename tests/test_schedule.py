@@ -3,7 +3,7 @@ from pathlib import Path
 from typer.testing import CliRunner
 
 from ff_tool.cli import app
-from ff_tool.schedule import _parse_cron
+from ff_tool.scheduler_core import _parse_cron
 
 runner = CliRunner()
 

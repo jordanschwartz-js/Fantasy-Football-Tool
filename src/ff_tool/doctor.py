@@ -1,7 +1,9 @@
 import os
+
 from ff_tool.config import get_config
 
-def run_doctor():
+
+def run_doctor() -> None:
     """
     Checks the user's setup and prints a report.
     """
