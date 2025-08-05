@@ -1,6 +1,8 @@
-from typer.testing import CliRunner
-from ff_tool.cli import app
 from unittest.mock import patch
+
+from typer.testing import CliRunner
+
+from ff_tool.cli import app
 
 runner = CliRunner()
 

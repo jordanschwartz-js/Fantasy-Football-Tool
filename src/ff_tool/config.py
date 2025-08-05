@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import Optional
 
-import toml
+import toml  # type: ignore
 from pydantic import BaseModel
 
 DEFAULT_CFG = Path.home() / ".config" / "ff_tool.toml"

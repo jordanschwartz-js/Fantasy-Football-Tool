@@ -30,7 +30,10 @@ def list_schedules(config_path: str = "ff_tool.toml") -> List[str]:
         return [config["bot"]["schedule"]]
     return []
 
-def _parse_cron(cron_string: str) -> "Dict[str, Any]":
+from typing import Any, Dict
+
+
+def _parse_cron(cron_string: str) -> Dict[str, Any]:
     """Parses a cron string into a dictionary."""
     parts = cron_string.split()
     day_of_week = parts[0].lower()

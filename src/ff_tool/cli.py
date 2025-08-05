@@ -85,7 +85,10 @@ def waiver(
             f"Score={rec['score']:.2f}, Bid=${rec['bid']}"
         )
 
+from ff_tool.scheduler_cli import app as sched_app
+
 app.add_typer(bot_app, name="bot")
+app.add_typer(sched_app, name="schedule")
 
 @app.command()
 def doctor():
