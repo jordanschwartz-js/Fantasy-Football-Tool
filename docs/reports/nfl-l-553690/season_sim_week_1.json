@@ -1,0 +1,88 @@
+{
+  "noise_sd": 0.12,
+  "playoff_slots": 4,
+  "runs": 5000,
+  "summary": [
+    {
+      "mean_remaining_wins": 2.0,
+      "mean_wins": 2.0,
+      "median_wins": 2.0,
+      "playoff_odds": 0.9982,
+      "team": "Le'Veon A Prayer",
+      "title_odds": 0.4062
+    },
+    {
+      "mean_remaining_wins": 1.0042,
+      "mean_wins": 1.0042,
+      "median_wins": 1.0,
+      "playoff_odds": 0.3942,
+      "team": "Michael\u2019S Useless Car Purchase",
+      "title_odds": 0.0852
+    },
+    {
+      "mean_remaining_wins": 1.0076,
+      "mean_wins": 1.0076,
+      "median_wins": 1.0,
+      "playoff_odds": 0.3936,
+      "team": "HAIL MARY",
+      "title_odds": 0.0866
+    },
+    {
+      "mean_remaining_wins": 1.0096,
+      "mean_wins": 1.0096,
+      "median_wins": 1.0,
+      "playoff_odds": 0.3906,
+      "team": "Gordon Rams Me",
+      "title_odds": 0.0924
+    },
+    {
+      "mean_remaining_wins": 0.9994,
+      "mean_wins": 0.9994,
+      "median_wins": 1.0,
+      "playoff_odds": 0.3884,
+      "team": "Elijah Loves Tattoos",
+      "title_odds": 0.0888
+    },
+    {
+      "mean_remaining_wins": 1.0008,
+      "mean_wins": 1.0008,
+      "median_wins": 1.0,
+      "playoff_odds": 0.3828,
+      "team": "Supreme Leader Elijah Khamenei",
+      "title_odds": 0.0734
+    },
+    {
+      "mean_remaining_wins": 0.9924,
+      "mean_wins": 0.9924,
+      "median_wins": 1.0,
+      "playoff_odds": 0.3802,
+      "team": "Jason Schwartz's Best Team",
+      "title_odds": 0.0864
+    },
+    {
+      "mean_remaining_wins": 0.9868,
+      "mean_wins": 0.9868,
+      "median_wins": 1.0,
+      "playoff_odds": 0.3802,
+      "team": "Javaris Jamarr Javarison-Lamar",
+      "title_odds": 0.081
+    },
+    {
+      "mean_remaining_wins": 0.5014,
+      "mean_wins": 0.5014,
+      "median_wins": 1.0,
+      "playoff_odds": 0.1484,
+      "team": "Super Coopers",
+      "title_odds": 0.0
+    },
+    {
+      "mean_remaining_wins": 0.4978,
+      "mean_wins": 0.4978,
+      "median_wins": 0.0,
+      "playoff_odds": 0.1434,
+      "team": "To Infinity and Bijan",
+      "title_odds": 0.0
+    }
+  ],
+  "week": 1
+}

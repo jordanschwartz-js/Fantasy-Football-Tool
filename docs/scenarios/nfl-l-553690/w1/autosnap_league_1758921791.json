@@ -1,0 +1,1545 @@
+{
+  "meta": {
+    "league": "nfl-l-553690",
+    "week": 1,
+    "saved_at": 1758921791,
+    "generated_at": 1758921791.853342,
+    "focus_team": null,
+    "kind": "autosnap"
+  },
+  "lineups": {
+    "Elijah Loves Tattoos": {
+      "team_key": null,
+      "team_name": "Elijah Loves Tattoos",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Lamar Jackson",
+          "team": "BAL",
+          "pos": "QB",
+          "rank": 23.0,
+          "score": 0.8695652173913043,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "De'Von Achane",
+          "team": "MIA",
+          "pos": "RB",
+          "rank": 14.0,
+          "score": 0.14285714285714285,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "D'Andre Swift",
+          "team": "CHI",
+          "pos": "RB",
+          "rank": 54.0,
+          "score": 0.037037037037037035,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "CeeDee Lamb",
+          "team": "DAL",
+          "pos": "WR",
+          "rank": 5.0,
+          "score": 0.2,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Garrett Wilson",
+          "team": "NYJ",
+          "pos": "WR",
+          "rank": 41.0,
+          "score": 0.024390243902439025,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "Brock Bowers",
+          "team": "LV",
+          "pos": "TE",
+          "rank": 19.0,
+          "score": 1.0,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Tyler Bass",
+          "team": "BUF",
+          "pos": "K",
+          "rank": 163.0,
+          "score": 0.21526326434301904,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Minnesota",
+          "team": "MIN",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "DJ Moore",
+          "team": "CHI",
+          "pos": "WR",
+          "rank": 50.0,
+          "score": 0.02,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Rhamondre Stevenson",
+          "team": "NE",
+          "pos": "RB",
+          "rank": 111.0,
+          "score": 0.018018018018018018
+        },
+        {
+          "player_name": "Jaydon Blue",
+          "team": "DAL",
+          "pos": "RB",
+          "rank": 139.0,
+          "score": 0.014388489208633094
+        },
+        {
+          "player_name": "Jakobi Meyers",
+          "team": "LV",
+          "pos": "WR",
+          "rank": 88.0,
+          "score": 0.011363636363636364
+        },
+        {
+          "player_name": "Cooper Kupp",
+          "team": "SEA",
+          "pos": "WR",
+          "rank": 90.0,
+          "score": 0.011111111111111112
+        },
+        {
+          "player_name": "Darnell Mooney",
+          "team": "ATL",
+          "pos": "WR",
+          "rank": 137.0,
+          "score": 0.0072992700729927005
+        },
+        {
+          "player_name": "Rashid Shaheed",
+          "team": "NO",
+          "pos": "WR",
+          "rank": 142.0,
+          "score": 0.007042253521126761
+        },
+        {
+          "player_name": "Deebo Samuel",
+          "team": "WAS",
+          "pos": "WR",
+          "rank": NaN,
+          "score": 0.0
+        },
+        {
+          "player_name": "Evan McPherson",
+          "team": "CIN",
+          "pos": "K",
+          "rank": 194.0,
+          "score": 0.0
+        }
+      ],
+      "notes": []
+    },
+    "Gordon Rams Me": {
+      "team_key": null,
+      "team_name": "Gordon Rams Me",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Josh Allen",
+          "team": "BUF",
+          "pos": "QB",
+          "rank": 20.0,
+          "score": 1.0,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Omarion Hampton",
+          "team": "LAC",
+          "pos": "RB",
+          "rank": 35.0,
+          "score": 0.05714285714285714,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "James Conner",
+          "team": "ARI",
+          "pos": "RB",
+          "rank": 47.0,
+          "score": 0.0425531914893617,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Nico Collins",
+          "team": "HOU",
+          "pos": "WR",
+          "rank": 13.0,
+          "score": 0.07692307692307693,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Brian Thomas Jr.",
+          "team": "JAX",
+          "pos": "WR",
+          "rank": 15.0,
+          "score": 0.06666666666666667,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "Tucker Kraft",
+          "team": "GB",
+          "pos": "TE",
+          "rank": 106.0,
+          "score": 0.10900050994390617,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Cam Little",
+          "team": "JAX",
+          "pos": "K",
+          "rank": 178.0,
+          "score": 0.10174095567353995,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Green Bay",
+          "team": "GB",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Xavier Worthy",
+          "team": "KC",
+          "pos": "WR",
+          "rank": 53.0,
+          "score": 0.018867924528301886,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Tetairoa McMillan",
+          "team": "CAR",
+          "pos": "WR",
+          "rank": 56.0,
+          "score": 0.017857142857142856
+        },
+        {
+          "player_name": "Travis Hunter",
+          "team": "JAX",
+          "pos": "WR",
+          "rank": 69.0,
+          "score": 0.014492753623188406
+        },
+        {
+          "player_name": "Ollie Gordon II",
+          "team": "MIA",
+          "pos": "RB",
+          "rank": 159.0,
+          "score": 0.012578616352201259
+        },
+        {
+          "player_name": "Dylan Sampson",
+          "team": "CLE",
+          "pos": "RB",
+          "rank": 168.0,
+          "score": 0.011904761904761904
+        },
+        {
+          "player_name": "Tyjae Spears",
+          "team": "TEN",
+          "pos": "RB",
+          "rank": 180.0,
+          "score": 0.011111111111111112
+        },
+        {
+          "player_name": "Khalil Shakir",
+          "team": "BUF",
+          "pos": "WR",
+          "rank": 101.0,
+          "score": 0.009900990099009901
+        },
+        {
+          "player_name": "MarShawn Lloyd",
+          "team": "GB",
+          "pos": "RB",
+          "rank": 300.0,
+          "score": 0.006666666666666667
+        },
+        {
+          "player_name": "Rashod Bateman",
+          "team": "BAL",
+          "pos": "WR",
+          "rank": 170.0,
+          "score": 0.0058823529411764705
+        },
+        {
+          "player_name": "Austin Ekeler",
+          "team": "WAS",
+          "pos": "RB",
+          "rank": NaN,
+          "score": 0.0
+        }
+      ],
+      "notes": []
+    },
+    "HAIL MARY": {
+      "team_key": null,
+      "team_name": "HAIL MARY",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Joe Burrow",
+          "team": "CIN",
+          "pos": "QB",
+          "rank": 32.0,
+          "score": 0.625,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "TreVeyon Henderson",
+          "team": "NE",
+          "pos": "RB",
+          "rank": 45.0,
+          "score": 0.044444444444444446,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Aaron Jones Sr.",
+          "team": "MIN",
+          "pos": "RB",
+          "rank": 67.0,
+          "score": 0.029850746268656716,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Malik Nabers",
+          "team": "NYG",
+          "pos": "WR",
+          "rank": 8.0,
+          "score": 0.125,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Drake London",
+          "team": "ATL",
+          "pos": "WR",
+          "rank": 17.0,
+          "score": 0.058823529411764705,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "George Kittle",
+          "team": "SF",
+          "pos": "TE",
+          "rank": 37.0,
+          "score": 0.4718772826880936,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Harrison Butker",
+          "team": "KC",
+          "pos": "K",
+          "rank": 169.0,
+          "score": 0.16743611418167634,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Buffalo",
+          "team": "BUF",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Jordan Mason",
+          "team": "MIN",
+          "pos": "RB",
+          "rank": 95.0,
+          "score": 0.021052631578947368,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Bo Nix",
+          "team": "DEN",
+          "pos": "QB",
+          "rank": 70.0,
+          "score": 0.2857142857142857
+        },
+        {
+          "player_name": "Zach Charbonnet",
+          "team": "SEA",
+          "pos": "RB",
+          "rank": 105.0,
+          "score": 0.01904761904761905
+        },
+        {
+          "player_name": "Nick Chubb",
+          "team": "HOU",
+          "pos": "RB",
+          "rank": 122.0,
+          "score": 0.01639344262295082
+        },
+        {
+          "player_name": "Calvin Ridley",
+          "team": "TEN",
+          "pos": "WR",
+          "rank": 65.0,
+          "score": 0.015384615384615385
+        },
+        {
+          "player_name": "Michael Pittman Jr.",
+          "team": "IND",
+          "pos": "WR",
+          "rank": 108.0,
+          "score": 0.009259259259259259
+        },
+        {
+          "player_name": "Jayden Higgins",
+          "team": "HOU",
+          "pos": "WR",
+          "rank": 150.0,
+          "score": 0.006666666666666667
+        },
+        {
+          "player_name": "Joshua Palmer",
+          "team": "BUF",
+          "pos": "WR",
+          "rank": 231.0,
+          "score": 0.004329004329004329
+        }
+      ],
+      "notes": []
+    },
+    "Jason Schwartz's Best Team": {
+      "team_key": null,
+      "team_name": "Jason Schwartz's Best Team",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Jalen Hurts",
+          "team": "PHI",
+          "pos": "QB",
+          "rank": 34.0,
+          "score": 0.588235294117647,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Jahmyr Gibbs",
+          "team": "DET",
+          "pos": "RB",
+          "rank": 4.0,
+          "score": 0.5,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Jonathan Taylor",
+          "team": "IND",
+          "pos": "RB",
+          "rank": 18.0,
+          "score": 0.1111111111111111,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "A.J. Brown",
+          "team": "PHI",
+          "pos": "WR",
+          "rank": 21.0,
+          "score": 0.047619047619047616,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Courtland Sutton",
+          "team": "DEN",
+          "pos": "WR",
+          "rank": 51.0,
+          "score": 0.0196078431372549,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "Evan Engram",
+          "team": "DEN",
+          "pos": "TE",
+          "rank": 81.0,
+          "score": 0.16905794683572462,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Brandon Aubrey",
+          "team": "DAL",
+          "pos": "K",
+          "rank": 103.0,
+          "score": 1.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Pittsburgh",
+          "team": "PIT",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Colston Loveland",
+          "team": "CHI",
+          "pos": "TE",
+          "rank": 113.0,
+          "score": 0.09694650402615004,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "David Montgomery",
+          "team": "DET",
+          "pos": "RB",
+          "rank": 58.0,
+          "score": 0.034482758620689655
+        },
+        {
+          "player_name": "Quinshon Judkins",
+          "team": "CLE",
+          "pos": "RB",
+          "rank": 118.0,
+          "score": 0.01694915254237288
+        },
+        {
+          "player_name": "Braelon Allen",
+          "team": "NYJ",
+          "pos": "RB",
+          "rank": 135.0,
+          "score": 0.014814814814814815
+        },
+        {
+          "player_name": "Jaylen Waddle",
+          "team": "MIA",
+          "pos": "WR",
+          "rank": 72.0,
+          "score": 0.013888888888888888
+        },
+        {
+          "player_name": "Stefon Diggs",
+          "team": "NE",
+          "pos": "WR",
+          "rank": 86.0,
+          "score": 0.011627906976744186
+        },
+        {
+          "player_name": "Luther Burden III",
+          "team": "CHI",
+          "pos": "WR",
+          "rank": 175.0,
+          "score": 0.005714285714285714
+        }
+      ],
+      "notes": []
+    },
+    "Javaris Jamarr Javarison-Lamar": {
+      "team_key": null,
+      "team_name": "Javaris Jamarr Javarison-Lamar",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Patrick Mahomes",
+          "team": "KC",
+          "pos": "QB",
+          "rank": NaN,
+          "score": 0.8,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Chase Brown",
+          "team": "CIN",
+          "pos": "RB",
+          "rank": 22.0,
+          "score": 0.09090909090909091,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Kyren Williams",
+          "team": "LAR",
+          "pos": "RB",
+          "rank": 25.0,
+          "score": 0.08,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Ja'Marr Chase",
+          "team": "CIN",
+          "pos": "WR",
+          "rank": 1.0,
+          "score": 0.9732497387669802,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "George Pickens",
+          "team": "DAL",
+          "pos": "WR",
+          "rank": 68.0,
+          "score": 0.8029411764705883,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "Tyler Warren",
+          "team": "IND",
+          "pos": "TE",
+          "rank": 87.0,
+          "score": 0.15149632391011703,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "DST",
+          "player_name": "Washington",
+          "team": "WAS",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Emeka Egbuka",
+          "team": "TB",
+          "pos": "WR",
+          "rank": 82.0,
+          "score": 0.38279430129724495,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Alvin Kamara",
+          "team": "NO",
+          "pos": "RB",
+          "rank": 36.0,
+          "score": 0.05555555555555555
+        },
+        {
+          "player_name": "Kaleb Johnson",
+          "team": "PIT",
+          "pos": "RB",
+          "rank": 76.0,
+          "score": 0.02631578947368421
+        },
+        {
+          "player_name": "Jameson Williams",
+          "team": "DET",
+          "pos": "WR",
+          "rank": 57.0,
+          "score": 0.017543859649122806
+        },
+        {
+          "player_name": "Christian Kirk",
+          "team": "HOU",
+          "pos": "WR",
+          "rank": 149.0,
+          "score": 0.006711409395973154
+        },
+        {
+          "player_name": "Marvin Mims Jr.",
+          "team": "DEN",
+          "pos": "WR",
+          "rank": 151.0,
+          "score": 0.006622516556291391
+        },
+        {
+          "player_name": "Adam Thielen",
+          "team": "MIN",
+          "pos": "WR",
+          "rank": 171.0,
+          "score": 0.005847953216374269
+        },
+        {
+          "player_name": "Dont'e Thornton Jr.",
+          "team": "LV",
+          "pos": "WR",
+          "rank": 218.0,
+          "score": 0.0045871559633027525
+        }
+      ],
+      "notes": [
+        "Not enough K (need 1, found 0)"
+      ]
+    },
+    "Le'Veon A Prayer": {
+      "team_key": null,
+      "team_name": "Le'Veon A Prayer",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Kyler Murray",
+          "team": "ARI",
+          "pos": "QB",
+          "rank": 83.0,
+          "score": 0.24096385542168675,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Christian McCaffrey",
+          "team": "SF",
+          "pos": "RB",
+          "rank": 7.0,
+          "score": 0.2857142857142857,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Josh Jacobs",
+          "team": "GB",
+          "pos": "RB",
+          "rank": 16.0,
+          "score": 0.125,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Mike Evans",
+          "team": "TB",
+          "pos": "WR",
+          "rank": 40.0,
+          "score": 0.025,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Zay Flowers",
+          "team": "BAL",
+          "pos": "WR",
+          "rank": 61.0,
+          "score": 0.01639344262295082,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "Trey McBride",
+          "team": "ARI",
+          "pos": "TE",
+          "rank": 27.0,
+          "score": 0.678345011678345,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Cameron Dicker",
+          "team": "LAC",
+          "pos": "K",
+          "rank": 128.0,
+          "score": 0.5836195054945056,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Denver",
+          "team": "DEN",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Breece Hall",
+          "team": "NYJ",
+          "pos": "RB",
+          "rank": 38.0,
+          "score": 0.05263157894736842,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Javonte Williams",
+          "team": "DAL",
+          "pos": "RB",
+          "rank": 107.0,
+          "score": 0.018691588785046728
+        },
+        {
+          "player_name": "Bhayshul Tuten",
+          "team": "JAX",
+          "pos": "RB",
+          "rank": 148.0,
+          "score": 0.013513513513513514
+        },
+        {
+          "player_name": "Chris Olave",
+          "team": "NO",
+          "pos": "WR",
+          "rank": 78.0,
+          "score": 0.01282051282051282
+        },
+        {
+          "player_name": "Ray Davis",
+          "team": "BUF",
+          "pos": "RB",
+          "rank": 172.0,
+          "score": 0.011627906976744186
+        },
+        {
+          "player_name": "Matthew Golden",
+          "team": "GB",
+          "pos": "WR",
+          "rank": 89.0,
+          "score": 0.011235955056179775
+        },
+        {
+          "player_name": "Isaac Guerendo",
+          "team": "SF",
+          "pos": "RB",
+          "rank": 209.0,
+          "score": 0.009569377990430622
+        },
+        {
+          "player_name": "Jalen Coker",
+          "team": "CAR",
+          "pos": "WR",
+          "rank": 260.0,
+          "score": 0.0038461538461538464
+        },
+        {
+          "player_name": "Hollywood Brown",
+          "team": "KC",
+          "pos": "WR",
+          "rank": NaN,
+          "score": 0.0
+        }
+      ],
+      "notes": []
+    },
+    "Michael\u2019S Useless Car Purchase": {
+      "team_key": null,
+      "team_name": "Michael\u2019S Useless Car Purchase",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Jayden Daniels",
+          "team": "WAS",
+          "pos": "QB",
+          "rank": 29.0,
+          "score": 0.689655172413793,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Bijan Robinson",
+          "team": "ATL",
+          "pos": "RB",
+          "rank": 2.0,
+          "score": 1.0,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "RJ Harvey",
+          "team": "DEN",
+          "pos": "RB",
+          "rank": 59.0,
+          "score": 0.03389830508474576,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Puka Nacua",
+          "team": "LAR",
+          "pos": "WR",
+          "rank": 12.0,
+          "score": 0.08333333333333333,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Ladd McConkey",
+          "team": "LAC",
+          "pos": "WR",
+          "rank": 26.0,
+          "score": 0.038461538461538464,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "T.J. Hockenson",
+          "team": "MIN",
+          "pos": "TE",
+          "rank": 64.0,
+          "score": 0.23669763513513517,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Jake Bates",
+          "team": "DET",
+          "pos": "K",
+          "rank": 126.0,
+          "score": 0.6108494679923252,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Arizona",
+          "team": "ARI",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Kyle Pitts Sr.",
+          "team": "ATL",
+          "pos": "TE",
+          "rank": 132.0,
+          "score": 0.07067294567294569,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Tyreek Hill",
+          "team": "MIA",
+          "pos": "WR",
+          "rank": 31.0,
+          "score": 0.03225806451612903
+        },
+        {
+          "player_name": "Travis Etienne Jr.",
+          "team": "JAX",
+          "pos": "RB",
+          "rank": 92.0,
+          "score": 0.021739130434782608
+        },
+        {
+          "player_name": "Joe Mixon",
+          "team": "HOU",
+          "pos": "RB",
+          "rank": 115.0,
+          "score": 0.017391304347826087
+        },
+        {
+          "player_name": "Rashee Rice",
+          "team": "KC",
+          "pos": "WR",
+          "rank": 71.0,
+          "score": 0.014084507042253521
+        },
+        {
+          "player_name": "Trey Benson",
+          "team": "ARI",
+          "pos": "RB",
+          "rank": 154.0,
+          "score": 0.012987012987012988
+        },
+        {
+          "player_name": "Keon Coleman",
+          "team": "BUF",
+          "pos": "WR",
+          "rank": 116.0,
+          "score": 0.008620689655172414
+        },
+        {
+          "player_name": "Brandon Aiyuk",
+          "team": "SF",
+          "pos": "WR",
+          "rank": 147.0,
+          "score": 0.006802721088435374
+        },
+        {
+          "player_name": "Kansas City",
+          "team": "KC",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0
+        }
+      ],
+      "notes": []
+    },
+    "Super Coopers": {
+      "team_key": null,
+      "team_name": "Super Coopers",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Baker Mayfield",
+          "team": "TB",
+          "pos": "QB",
+          "rank": 62.0,
+          "score": 0.3225806451612903,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "James Cook III",
+          "team": "BUF",
+          "pos": "RB",
+          "rank": 28.0,
+          "score": 0.07142857142857142,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Tony Pollard",
+          "team": "TEN",
+          "pos": "RB",
+          "rank": 66.0,
+          "score": 0.030303030303030304,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Justin Jefferson",
+          "team": "MIN",
+          "pos": "WR",
+          "rank": 6.0,
+          "score": 0.16666666666666666,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Amon-Ra St. Brown",
+          "team": "DET",
+          "pos": "WR",
+          "rank": 9.0,
+          "score": 0.1111111111111111,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "Sam LaPorta",
+          "team": "DET",
+          "pos": "TE",
+          "rank": 52.0,
+          "score": 0.3110706860706861,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Wil Lutz",
+          "team": "DEN",
+          "pos": "K",
+          "rank": 185.0,
+          "score": 0.05506385506385516,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Detroit",
+          "team": "DET",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Travis Kelce",
+          "team": "KC",
+          "pos": "TE",
+          "rank": 63.0,
+          "score": 0.24181324181324182,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Tyrone Tracy Jr.",
+          "team": "NYG",
+          "pos": "RB",
+          "rank": 75.0,
+          "score": 0.02666666666666667
+        },
+        {
+          "player_name": "Terry McLaurin",
+          "team": "WAS",
+          "pos": "WR",
+          "rank": 39.0,
+          "score": 0.02564102564102564
+        },
+        {
+          "player_name": "DK Metcalf",
+          "team": "PIT",
+          "pos": "WR",
+          "rank": 48.0,
+          "score": 0.020833333333333332
+        },
+        {
+          "player_name": "Brian Robinson Jr.",
+          "team": "SF",
+          "pos": "RB",
+          "rank": 120.0,
+          "score": 0.016666666666666666
+        },
+        {
+          "player_name": "Tank Bigsby",
+          "team": "PHI",
+          "pos": "RB",
+          "rank": 131.0,
+          "score": 0.015267175572519083
+        },
+        {
+          "player_name": "Jauan Jennings",
+          "team": "SF",
+          "pos": "WR",
+          "rank": 104.0,
+          "score": 0.009615384615384616
+        },
+        {
+          "player_name": "Romeo Doubs",
+          "team": "GB",
+          "pos": "WR",
+          "rank": 192.0,
+          "score": 0.005208333333333333
+        }
+      ],
+      "notes": []
+    },
+    "Supreme Leader Elijah Khamenei": {
+      "team_key": null,
+      "team_name": "Supreme Leader Elijah Khamenei",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Justin Fields",
+          "team": "NYJ",
+          "pos": "QB",
+          "rank": 114.0,
+          "score": 0.17543859649122806,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Saquon Barkley",
+          "team": "PHI",
+          "pos": "RB",
+          "rank": 3.0,
+          "score": 0.6666666666666666,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Bucky Irving",
+          "team": "TB",
+          "pos": "RB",
+          "rank": 24.0,
+          "score": 0.08333333333333333,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Tee Higgins",
+          "team": "CIN",
+          "pos": "WR",
+          "rank": 30.0,
+          "score": 0.03333333333333333,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Marvin Harrison Jr.",
+          "team": "ARI",
+          "pos": "WR",
+          "rank": 44.0,
+          "score": 0.022727272727272728,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "Mark Andrews",
+          "team": "BAL",
+          "pos": "TE",
+          "rank": 73.0,
+          "score": 0.19696408737504628,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Chris Boswell",
+          "team": "PIT",
+          "pos": "K",
+          "rank": 155.0,
+          "score": 0.2847926267281107,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Philadelphia",
+          "team": "PHI",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Chuba Hubbard",
+          "team": "CAR",
+          "pos": "RB",
+          "rank": 46.0,
+          "score": 0.043478260869565216,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Jaylen Warren",
+          "team": "PIT",
+          "pos": "RB",
+          "rank": 84.0,
+          "score": 0.023809523809523808
+        },
+        {
+          "player_name": "Rachaad White",
+          "team": "TB",
+          "pos": "RB",
+          "rank": 143.0,
+          "score": 0.013986013986013986
+        },
+        {
+          "player_name": "Jerry Jeudy",
+          "team": "CLE",
+          "pos": "WR",
+          "rank": 74.0,
+          "score": 0.013513513513513514
+        },
+        {
+          "player_name": "Rome Odunze",
+          "team": "CHI",
+          "pos": "WR",
+          "rank": 77.0,
+          "score": 0.012987012987012988
+        },
+        {
+          "player_name": "Ricky Pearsall",
+          "team": "SF",
+          "pos": "WR",
+          "rank": 85.0,
+          "score": 0.011764705882352941
+        },
+        {
+          "player_name": "Chris Godwin Jr.",
+          "team": "TB",
+          "pos": "WR",
+          "rank": 102.0,
+          "score": 0.00980392156862745
+        },
+        {
+          "player_name": "Keenan Allen",
+          "team": "LAC",
+          "pos": "WR",
+          "rank": 146.0,
+          "score": 0.00684931506849315
+        },
+        {
+          "player_name": "Christian Watson",
+          "team": "GB",
+          "pos": "WR",
+          "rank": 336.0,
+          "score": 0.002976190476190476
+        },
+        {
+          "player_name": "Mason Taylor",
+          "team": "NYJ",
+          "pos": "TE",
+          "rank": 241.0,
+          "score": 0.0
+        }
+      ],
+      "notes": []
+    },
+    "To Infinity and Bijan": {
+      "team_key": null,
+      "team_name": "To Infinity and Bijan",
+      "starters": [
+        {
+          "slot": "QB",
+          "player_name": "Trevor Lawrence",
+          "team": "JAX",
+          "pos": "QB",
+          "rank": 158.0,
+          "score": 0.12658227848101264,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Derrick Henry",
+          "team": "BAL",
+          "pos": "RB",
+          "rank": 10.0,
+          "score": 0.2,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "RB",
+          "player_name": "Kenneth Walker III",
+          "team": "SEA",
+          "pos": "RB",
+          "rank": 43.0,
+          "score": 0.046511627906976744,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Jaxon Smith-Njigba",
+          "team": "SEA",
+          "pos": "WR",
+          "rank": 33.0,
+          "score": 0.030303030303030304,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "WR",
+          "player_name": "Davante Adams",
+          "team": "LAR",
+          "pos": "WR",
+          "rank": 42.0,
+          "score": 0.023809523809523808,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "TE",
+          "player_name": "David Njoku",
+          "team": "CLE",
+          "pos": "TE",
+          "rank": 80.0,
+          "score": 0.17224099099099102,
+          "risk_score": 0.0,
+          "locked": false
+        },
+        {
+          "slot": "K",
+          "player_name": "Chase McLaughlin",
+          "team": "TB",
+          "pos": "K",
+          "rank": 144.0,
+          "score": 0.393009768009768,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "DST",
+          "player_name": "Houston",
+          "team": "HOU",
+          "pos": "DST",
+          "rank": NaN,
+          "score": 0.0,
+          "risk_score": 0.0,
+          "locked": true
+        },
+        {
+          "slot": "FLEX",
+          "player_name": "Isiah Pacheco",
+          "team": "KC",
+          "pos": "RB",
+          "rank": 60.0,
+          "score": 0.03333333333333333,
+          "risk_score": 0.0,
+          "locked": false
+        }
+      ],
+      "bench": [
+        {
+          "player_name": "Jacory Croskey-Merritt",
+          "team": "WAS",
+          "pos": "RB",
+          "rank": 96.0,
+          "score": 0.020833333333333332
+        },
+        {
+          "player_name": "J.K. Dobbins",
+          "team": "DEN",
+          "pos": "RB",
+          "rank": 98.0,
+          "score": 0.02040816326530612
+        },
+        {
+          "player_name": "DeVonta Smith",
+          "team": "PHI",
+          "pos": "WR",
+          "rank": 55.0,
+          "score": 0.01818181818181818
+        },
+        {
+          "player_name": "Jordan Addison",
+          "team": "MIN",
+          "pos": "WR",
+          "rank": 91.0,
+          "score": 0.01098901098901099
+        },
+        {
+          "player_name": "Josh Downs",
+          "team": "IND",
+          "pos": "WR",
+          "rank": 121.0,
+          "score": 0.008264462809917356
+        },
+        {
+          "player_name": "Jayden Reed",
+          "team": "GB",
+          "pos": "WR",
+          "rank": 124.0,
+          "score": 0.008064516129032258
+        }
+      ],
+      "notes": []
+    }
+  },
+  "waivers": [
+    {
+      "player_name": "Jared Goff",
+      "pos": "QB",
+      "team": "DET",
+      "final_score": 0.2010955961331901,
+      "suggested_for": [
+        "Le'Veon A Prayer"
+      ],
+      "rationale": "Top-2 QB for Le'Veon A Prayer; +0.20 vs starter; Targets DST slot; Status/DvP/Vegas/weather/usage multipliers applied",
+      "faab_suggest": 20.0,
+      "faab_why": "+0.20 vs starter; 100th percentile QB; capped at $20"
+    },
+    {
+      "player_name": "David Njoku",
+      "pos": "TE",
+      "team": "CLE",
+      "final_score": 0.19189622797813005,
+      "suggested_for": [
+        "Le'Veon A Prayer"
+      ],
+      "rationale": "Top-2 TE for Le'Veon A Prayer; +0.19 vs starter; Targets FLEX slot; Status/DvP/Vegas/weather/usage multipliers applied",
+      "faab_suggest": 20.0,
+      "faab_why": "+0.19 vs starter; 100th percentile TE; capped at $20"
+    }
+  ]
+}

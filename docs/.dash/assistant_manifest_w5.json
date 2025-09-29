@@ -1,0 +1,125 @@
+{
+  "week": 5,
+  "lineup": {
+    "total_optimal": 1.91,
+    "total_current": 1.43,
+    "delta_points": 0.48,
+    "suggestions": [
+      "Start Chris Olave (WR, NO) over Zay Flowers (+0.5 pts) [SoS+, Targets+]",
+      "FLEX: Start Chris Olave (WR, NO) over Zay Flowers (+0.5 pts) [SoS+, Targets+]"
+    ]
+  },
+  "waivers": [],
+  "trades": {
+    "buys": [
+      {
+        "name": "Kyler Murray",
+        "pos": "QB",
+        "team": "ARI",
+        "delta_ros": 218.95,
+        "why": [
+          "SoS+ rank 9"
+        ]
+      },
+      {
+        "name": "Josh Jacobs",
+        "pos": "RB",
+        "team": "GB",
+        "delta_ros": 140.75,
+        "why": [
+          "SoS+",
+          "Targets+"
+        ]
+      },
+      {
+        "name": "Mike Evans",
+        "pos": "WR",
+        "team": "TB",
+        "delta_ros": 135.42,
+        "why": [
+          "SoS+ rank 4",
+          "Targets+"
+        ]
+      },
+      {
+        "name": "Zay Flowers",
+        "pos": "WR",
+        "team": "BAL",
+        "delta_ros": 136.22,
+        "why": [
+          "SoS+ rank 3",
+          "Targets+"
+        ]
+      },
+      {
+        "name": "Trey McBride",
+        "pos": "TE",
+        "team": "ARI",
+        "delta_ros": 97.32,
+        "why": [
+          "SoS+",
+          "Targets+"
+        ]
+      },
+      {
+        "name": "Breece Hall",
+        "pos": "RB",
+        "team": "NYJ",
+        "delta_ros": 129.45,
+        "why": [
+          "SoS+",
+          "Targets+"
+        ]
+      },
+      {
+        "name": "Javonte Williams",
+        "pos": "RB",
+        "team": "DAL",
+        "delta_ros": 136.48,
+        "why": [
+          "SoS+ rank 7",
+          "Targets+"
+        ]
+      },
+      {
+        "name": "Chris Olave",
+        "pos": "WR",
+        "team": "NO",
+        "delta_ros": 127.07,
+        "why": [
+          "SoS+",
+          "Targets+"
+        ]
+      },
+      {
+        "name": "Ray Davis",
+        "pos": "RB",
+        "team": "BUF",
+        "delta_ros": 153.11,
+        "why": [
+          "SoS+ rank 1"
+        ]
+      },
+      {
+        "name": "Isaac Guerendo",
+        "pos": "RB",
+        "team": "SF",
+        "delta_ros": 139.99,
+        "why": [
+          "SoS+"
+        ]
+      },
+      {
+        "name": "Jalen Coker",
+        "pos": "WR",
+        "team": "CAR",
+        "delta_ros": 131.51,
+        "why": [
+          "SoS+ rank 9"
+        ]
+      }
+    ],
+    "sells": []
+  },
+  "generated_at": "2025-09-29T20:41:50Z"
+}

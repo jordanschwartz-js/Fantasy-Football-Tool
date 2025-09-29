@@ -1,0 +1,16 @@
+{
+  "version": "v3.0",
+  "built_at": "2025-09-27T20:32:35+00:00",
+  "leagues": [
+    {
+      "slug": "nfl-l-553690",
+      "name": "Nfl L 553690",
+      "latest_week": 4,
+      "weeks": [
+        1,
+        4
+      ],
+      "index": "reports/nfl-l-553690/index.json"
+    }
+  ]
+}

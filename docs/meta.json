@@ -1,0 +1,22 @@
+{
+  "title": "FF Assistant",
+  "subtitle": "nfl-l-553690",
+  "theme": "light",
+  "version": "v3.0",
+  "built_at": "2025-09-27T20:32:35+00:00",
+  "leagues": [
+    {
+      "slug": "nfl-l-553690",
+      "name": "Nfl L 553690",
+      "weeks": [
+        1,
+        4
+      ],
+      "latest_week": 4
+    }
+  ],
+  "downloads": {
+    "nfl-l-553690": []
+  },
+  "default_league": "nfl-l-553690"
+}

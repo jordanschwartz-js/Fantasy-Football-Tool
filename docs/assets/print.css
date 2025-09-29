@@ -1,0 +1,74 @@
+@media print {
+    *,
+    *::before,
+    *::after {
+        box-shadow: none !important;
+        text-shadow: none !important;
+        background-image: none !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+    }
+
+    header.controls,
+    nav.tab-bar,
+    .share-actions,
+    #scenario-status,
+    #notifications-panel,
+    #site-footer,
+    #trade-modal,
+    #trade-modal-backdrop,
+    .skip-link {
+        display: none !important;
+    }
+
+    .content-shell {
+        display: block;
+        margin: 0;
+    }
+
+    main {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .panel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        page-break-before: auto;
+        page-break-after: auto;
+        background: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    .panel + .panel {
+        page-break-before: always;
+    }
+
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    table th,
+    table td {
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+        padding: 0.35rem 0.5rem !important;
+    }
+
+    a {
+        color: #000000 !important;
+        text-decoration: none;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+    }
+}

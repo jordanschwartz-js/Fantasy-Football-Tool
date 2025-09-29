@@ -1,0 +1,531 @@
+<!doctype html><meta charset="utf-8">
+<title>FF Assistant Dashboard</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../.dash/ff.css">
+<style>
+body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:980px;margin:24px auto;padding:0 16px}
+h1,h2{margin:12px 0} table{border-collapse:collapse} th,td{border:1px solid #ddd;padding:6px 8px}
+.badge{display:inline-block;padding:2px 6px;border-radius:6px;background:#eef}
+.provenance-badge{display:none;margin:8px 0;padding:6px 10px;border-radius:6px;background:#f5f7ff;border:1px solid #d1d7f4;color:#3f4865;font-size:.9rem}
+.provenance-badge.show{display:inline-block}
+.provenance-badge strong{font-weight:600;margin-right:4px}
+</style>
+<h1>FF Assistant Dashboard</h1>
+<nav><a href="../.dash/index.html">← Back to .dash</a></nav>
+<p class="badge">Reads public/.dash/assistant_manifest_w*.json</p>
+<div id="provenance-badge" class="provenance-badge" role="status" aria-live="polite"></div>
+<div class="toolbar" id="week-toolbar">
+  <label for="weekSelect">Week</label>
+  <select id="weekSelect" class="select" aria-label="Select week"></select>
+  <a class="btn sm" href="../.dash/index.html">Open .dash index</a>
+  <a class="btn sm" href="../.dash/metrics.html">Metrics</a>
+</div>
+<div class="toolbar" id="dashboard-toolbar">
+  <div class="toolbar-buttons">
+    <button type="button" class="btn active" data-pos="ALL" aria-pressed="true">All</button>
+    <button type="button" class="btn" data-pos="QB" aria-pressed="false">QB</button>
+    <button type="button" class="btn" data-pos="RB" aria-pressed="false">RB</button>
+    <button type="button" class="btn" data-pos="WR" aria-pressed="false">WR</button>
+    <button type="button" class="btn" data-pos="TE" aria-pressed="false">TE</button>
+  </div>
+  <input type="search" id="toolbar-search" class="toolbar-search" placeholder="Search players…" aria-label="Search players">
+</div>
+<div id="app">Loading…</div>
+<div id="artifact-nav"></div>
+<script>
+(async function(){
+  const baseDash = '../.dash';
+  const weekSelect = document.getElementById('weekSelect');
+  const toolbar = document.getElementById('dashboard-toolbar');
+  const navContainer = document.getElementById('artifact-nav');
+  const provenanceEl = document.getElementById('provenance-badge');
+  const buttons = toolbar ? Array.from(toolbar.querySelectorAll('[data-pos]')) : [];
+  const searchInput = document.getElementById('toolbar-search');
+  const app = document.getElementById('app');
+  const state = { pos: 'ALL', q: '', week: null };
+  const sortState = {};
+  const manifestCache = new Map();
+  const availabilityCache = new Map();
+  let currentData = null;
+  let fallbackMeta = null;
+  let weeksIndex = { weeks: [], latest: null };
+  let renderToken = 0;
+
+  const tableConfigs = {
+    waivers: { headers: ['Name','Pos','Team','Proj','VOS','FAAB','Conf'], numeric: new Set(['Proj','VOS','FAAB','Conf']), limit: 10 },
+    trades_buy: { headers: ['Name','Pos','Team','Δ_ROS'], numeric: new Set(['Δ_ROS']), limit: 10 },
+    trades_sell: { headers: ['Name','Pos','Team','Δ_ROS'], numeric: new Set(['Δ_ROS']), limit: 10 }
+  };
+
+  const artifactFiles = {
+    lineup: { base: 'lineup_delta', label: 'Lineup Δ' },
+    waivers: { base: 'waivers', label: 'Waivers' },
+    trades: { base: 'trades', label: 'Trades' },
+    manifest: { base: 'assistant_manifest', label: 'Manifest' }
+  };
+
+  function debounce(fn, delay){
+    let t;
+    return (...args)=>{
+      clearTimeout(t);
+      t = setTimeout(()=>fn(...args), delay);
+    };
+  }
+
+  const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[c]);
+
+  const normalizePos = (value) => String(value ?? '').trim().toUpperCase();
+
+  const formatSource = (value) => {
+    const lookup = { usage: 'Usage', ensemble: 'Ensemble', artifact: 'Artifact' };
+    const key = String(value ?? '').toLowerCase();
+    return lookup[key] || (value ? String(value) : 'Unknown');
+  };
+
+  function valueToString(value){
+    if (value === null || value === undefined) return '';
+    return String(value);
+  }
+
+  function filterRows(rows){
+    return rows.filter((row) => {
+      const pos = normalizePos(row.Pos ?? row.pos ?? '');
+      if (state.pos !== 'ALL' && pos !== state.pos) return false;
+      const name = String(row.Name ?? row.name ?? '').toLowerCase();
+      if (state.q && !name.includes(state.q)) return false;
+      return true;
+    });
+  }
+
+  function numericValue(value){
+    if (value === null || value === undefined) return null;
+    if (typeof value === 'number') {
+      return Number.isFinite(value) ? value : null;
+    }
+    const parsed = parseFloat(String(value).replace(/[^0-9.-]/g, ''));
+    return Number.isNaN(parsed) ? null : parsed;
+  }
+
+  function compareRows(a, b, column, numericSet){
+    if (numericSet.has(column)) {
+      const av = numericValue(a[column]);
+      const bv = numericValue(b[column]);
+      if (av !== null && bv !== null) {
+        if (av < bv) return -1;
+        if (av > bv) return 1;
+        return 0;
+      }
+    }
+    const as = String(a[column] ?? '').toLowerCase();
+    const bs = String(b[column] ?? '').toLowerCase();
+    if (as < bs) return -1;
+    if (as > bs) return 1;
+    return 0;
+  }
+
+  function makeSimpleTable(headers, rows){
+    const th = headers.map((h) => `<th scope="col">${esc(h)}</th>`).join('');
+    const body = rows.length
+      ? rows.map((row) => `<tr>${headers.map((h) => `<td>${esc(row[h] ?? '')}</td>`).join('')}</tr>`).join('')
+      : `<tr><td colspan="${headers.length}">No data</td></tr>`;
+    return `<table><thead><tr>${th}</tr></thead><tbody>${body}</tbody></table>`;
+  }
+
+  function buildTable(key, rows){
+    const config = tableConfigs[key];
+    if (!config) return '';
+    const filtered = filterRows(rows.slice());
+    const sort = sortState[key];
+    if (sort && sort.column && config.headers.includes(sort.column)) {
+      filtered.sort((a, b) => {
+        const cmp = compareRows(a, b, sort.column, config.numeric);
+        return sort.dir === 'desc' ? -cmp : cmp;
+      });
+    }
+    const limited = config.limit ? filtered.slice(0, config.limit) : filtered;
+    const tbody = limited.length
+      ? limited.map((row) => {
+          const pos = normalizePos(row.Pos ?? row.pos ?? '');
+          const name = String(row.Name ?? row.name ?? '');
+          const cells = config.headers.map((header) => `<td>${esc(row[header] ?? '')}</td>`).join('');
+          return `<tr data-pos="${esc(pos)}" data-name="${esc(name.toLowerCase())}">${cells}</tr>`;
+        }).join('')
+      : `<tr><td colspan="${config.headers.length}">No matches</td></tr>`;
+    const headerHtml = config.headers.map((header) => {
+      const active = sort && sort.column === header;
+      const indicator = active ? (sort.dir === 'asc' ? '▲' : '▼') : '';
+      const ariaSort = active ? (sort.dir === 'asc' ? 'ascending' : 'descending') : 'none';
+      return `<th scope="col" data-key="${esc(header)}" aria-sort="${ariaSort}">${esc(header)}${indicator ? ` <span class="sort-indicator">${indicator}</span>` : ''}</th>`;
+    }).join('');
+    return `<table class="sortable" data-table-key="${esc(key)}"><thead><tr>${headerHtml}</tr></thead><tbody>${tbody}</tbody></table>`;
+  }
+
+  function attachSortHandlers(){
+    if (!app) return;
+    app.querySelectorAll('table.sortable').forEach((table) => {
+      const key = table.dataset.tableKey;
+      const config = tableConfigs[key];
+      if (!config) return;
+      table.querySelectorAll('th[data-key]').forEach((th) => {
+        const column = th.dataset.key;
+        th.addEventListener('click', () => {
+          const current = sortState[key];
+          let dir = 'asc';
+          if (current && current.column === column) {
+            dir = current.dir === 'asc' ? 'desc' : 'asc';
+          }
+          sortState[key] = { column, dir };
+          scheduleRender();
+        });
+      });
+    });
+  }
+
+  function updateButtons(pos){
+    buttons.forEach((btn) => {
+      const isActive = btn.dataset.pos === pos;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  }
+
+  async function checkExists(url){
+    if (availabilityCache.has(url)) {
+      return availabilityCache.get(url);
+    }
+    try {
+      const res = await fetch(url, { method: 'HEAD' });
+      if (res.ok) {
+        availabilityCache.set(url, true);
+        return true;
+      }
+      if (res.status === 405) {
+        throw new Error('HEAD not supported');
+      }
+    } catch (err) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok) {
+          availabilityCache.set(url, true);
+          return true;
+        }
+      } catch (inner) {
+        // ignore
+      }
+    }
+    availabilityCache.set(url, false);
+    return false;
+  }
+
+  async function buildDownloads(kind, week){
+    const meta = artifactFiles[kind];
+    if (!meta) {
+      return { markup: '', available: false };
+    }
+    const slug = encodeURIComponent(String(week));
+    const htmlUrl = `${baseDash}/${meta.base}_w${slug}.html`;
+    const jsonUrl = `${baseDash}/${meta.base}_w${slug}.json`;
+    const [htmlExists, jsonExists] = await Promise.all([
+      checkExists(htmlUrl),
+      checkExists(jsonUrl)
+    ]);
+
+    if (!htmlExists && !jsonExists) {
+      return {
+        markup: `<p class="downloads-note">${esc(meta.label)} not available for Week ${esc(week)}.</p>`,
+        available: false
+      };
+    }
+
+    const links = [];
+    if (htmlExists) {
+      links.push(`<a class="btn sm" href="${esc(htmlUrl)}" download>HTML</a>`);
+    }
+    if (jsonExists) {
+      links.push(`<a class="btn sm" href="${esc(jsonUrl)}" download>JSON</a>`);
+    }
+    return {
+      markup: `<div class="downloads" role="group" aria-label="${esc(meta.label)} downloads">${links.join('')}</div>`,
+      available: true
+    };
+  }
+
+  async function fetchWeeksIndex(){
+    try {
+      const res = await fetch(`${baseDash}/weeks_index.json`, { cache: 'no-store' });
+      if (res.ok) {
+        const json = await res.json();
+        if (Array.isArray(json.weeks)) {
+          return json;
+        }
+      }
+    } catch (err) {
+      // ignore and fallback
+    }
+    return null;
+  }
+
+  async function fetchLegacyLatest(){
+    for (let w = 21; w >= 1; w--) {
+      try {
+        const res = await fetch(`${baseDash}/assistant_manifest_w${w}.json`, { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          return { week: w, data };
+        }
+      } catch (err) {
+        // continue searching
+      }
+    }
+    return null;
+  }
+
+  async function fetchManifest(week){
+    if (manifestCache.has(week)) {
+      return manifestCache.get(week);
+    }
+    try {
+      const res = await fetch(`${baseDash}/assistant_manifest_w${encodeURIComponent(String(week))}.json`, { cache: 'no-store' });
+      if (res.ok) {
+        const json = await res.json();
+        manifestCache.set(week, json);
+        return json;
+      }
+    } catch (err) {
+      // swallow and fall through
+    }
+    manifestCache.set(week, null);
+    return null;
+  }
+
+  async function fetchFallbackMeta(week){
+    if (!week) return null;
+    const suffix = `.fallback_meta_w${encodeURIComponent(String(week))}.json`;
+    const candidates = [`${baseDash}/${suffix}`];
+    for (const path of candidates){
+      try {
+        const res = await fetch(path, { cache: 'no-store' });
+        if (res.ok) {
+          return await res.json();
+        }
+      } catch (err) {
+        // try next
+      }
+    }
+    return null;
+  }
+
+  function updateProvenanceBadge(meta, week){
+    if (!provenanceEl) return;
+    if (meta && (meta.roster_source || meta.fa_source)) {
+      const rosterSource = formatSource(meta.roster_source);
+      const faSource = formatSource(meta.fa_source);
+      provenanceEl.innerHTML = `<strong>Week ${esc(week)}:</strong> Roster fallback • ${esc(rosterSource)} <span aria-hidden="true">|</span> Free Agents fallback • ${esc(faSource)}`;
+      provenanceEl.title = `Yahoo sync not configured; synthesized from ${rosterSource} roster and ${faSource} free agents.`;
+      provenanceEl.classList.add('show');
+    } else {
+      provenanceEl.classList.remove('show');
+      provenanceEl.textContent = '';
+      provenanceEl.removeAttribute('title');
+    }
+  }
+
+  function populateWeekSelect(weeks, selected){
+    if (!weekSelect) return;
+    if (!Array.isArray(weeks) || !weeks.length) {
+      weekSelect.innerHTML = '<option value="">No weeks yet</option>';
+      weekSelect.disabled = true;
+      return;
+    }
+    weekSelect.innerHTML = weeks.map((week) => `<option value="${esc(week)}">Week ${esc(week)}</option>`).join('');
+    weekSelect.disabled = false;
+    if (selected) {
+      weekSelect.value = String(selected);
+    } else {
+      weekSelect.value = String(weeks[0]);
+    }
+  }
+
+  function updateNavigator(selectedWeek){
+    if (!navContainer) return;
+    if (!Array.isArray(weeksIndex.weeks) || !weeksIndex.weeks.length) {
+      navContainer.innerHTML = '';
+      return;
+    }
+    const limited = weeksIndex.weeks.slice(0, 6);
+    const items = limited.map((week) => {
+      const links = [
+        `<a href="${esc(`${baseDash}/lineup_delta_w${week}.html`)}">Lineup</a>`,
+        `<a href="${esc(`${baseDash}/waivers_w${week}.html`)}">Waivers</a>`,
+        `<a href="${esc(`${baseDash}/trades_w${week}.html`)}">Trades</a>`,
+        `<a href="${esc(`${baseDash}/assistant_manifest_w${week}.json`)}">Manifest</a>`
+      ].join(' · ');
+      const current = week === selectedWeek ? ' class="current"' : '';
+      return `<li${current}><span>Week ${esc(week)}</span> · ${links}</li>`;
+    }).join('');
+    navContainer.innerHTML = `<div class="artifact-nav"><h3>Artifacts</h3><ul>${items}</ul></div>`;
+  }
+
+  async function renderAll(){
+    const week = state.week;
+    if (!app) return;
+    if (!week) {
+      app.textContent = 'No manifest found yet.';
+      return;
+    }
+
+    const [lineupDl, waiversDl, tradesDl] = await Promise.all([
+      buildDownloads('lineup', week),
+      buildDownloads('waivers', week),
+      buildDownloads('trades', week)
+    ]);
+
+    if (!currentData) {
+      app.innerHTML = `<h2>Week ${esc(week)}</h2><p class="downloads-note">Assistant manifest not available for Week ${esc(week)}.</p>${lineupDl.markup}${waiversDl.markup}${tradesDl.markup}`;
+      return;
+    }
+
+    const weekSlug = encodeURIComponent(String(week));
+    let html = `<h2>Week ${esc(week)}</h2>`;
+
+    if (currentData.lineup) {
+      html += `<section id="lineup-section"><h3>Lineup Δ</h3>`;
+      if (currentData.lineup.delta_points !== undefined) {
+        html += `<p>Δ: ${esc(currentData.lineup.delta_points)}</p>`;
+      }
+      const suggestions = (currentData.lineup.suggestions ?? []).slice(0, 8).map((s) => ({ Suggestion: s }));
+      html += makeSimpleTable(['Suggestion'], suggestions);
+      html += lineupDl.markup;
+      html += `<p class="section-link"><a href="${esc(`${baseDash}/lineup_delta_w${weekSlug}.html`)}">Full lineup delta</a></p></section>`;
+    } else {
+      html += `<section id="lineup-section"><h3>Lineup Δ</h3><p class="downloads-note">Lineup delta not present in manifest for Week ${esc(week)}.</p>${lineupDl.markup}</section>`;
+    }
+
+    const waiversRows = Array.isArray(currentData.waivers)
+      ? currentData.waivers.map((r) => ({
+          Name: valueToString(r.name ?? r.player ?? ''),
+          Pos: normalizePos(r.pos ?? r.position ?? ''),
+          Team: valueToString(r.team ?? ''),
+          Proj: valueToString(r.proj ?? r.projection ?? r.points ?? ''),
+          VOS: valueToString(r.VOS ?? r.vos ?? r.value ?? ''),
+          FAAB: valueToString(r.FAAB ?? r.faab ?? ''),
+          Conf: valueToString(r.confidence ?? r.conf ?? r.Conf ?? '')
+        }))
+      : [];
+
+    if (waiversRows.length) {
+      html += `<section id="waivers-section"><h3>Waivers</h3>${buildTable('waivers', waiversRows)}${waiversDl.markup}<p class="section-link"><a href="${esc(`${baseDash}/waivers_w${weekSlug}.html`)}">Full waivers report</a></p></section>`;
+    } else {
+      html += `<section id="waivers-section"><h3>Waivers</h3><p class="downloads-note">Waivers not present in manifest for Week ${esc(week)}.</p>${waiversDl.markup}</section>`;
+    }
+
+    const tradesBuyRows = Array.isArray(currentData.trades?.buys)
+      ? currentData.trades.buys.map((r) => ({
+          Name: valueToString(r.name ?? ''),
+          Pos: normalizePos(r.pos ?? r.position ?? ''),
+          Team: valueToString(r.team ?? ''),
+          'Δ_ROS': valueToString(r['Δ_ROS'] ?? r.delta_ros ?? r.deltaROS ?? '')
+        }))
+      : [];
+
+    const tradesSellRows = Array.isArray(currentData.trades?.sells)
+      ? currentData.trades.sells.map((r) => ({
+          Name: valueToString(r.name ?? ''),
+          Pos: normalizePos(r.pos ?? r.position ?? ''),
+          Team: valueToString(r.team ?? ''),
+          'Δ_ROS': valueToString(r['Δ_ROS'] ?? r.delta_ros ?? r.deltaROS ?? '')
+        }))
+      : [];
+
+    if (tradesBuyRows.length || tradesSellRows.length) {
+      html += `<section id="trades-section"><h3>Trades</h3>`;
+      html += `<h4>Buy Lows</h4>${buildTable('trades_buy', tradesBuyRows)}`;
+      html += `<h4>Sell Highs</h4>${buildTable('trades_sell', tradesSellRows)}`;
+      html += tradesDl.markup;
+      html += `<p class="section-link"><a href="${esc(`${baseDash}/trades_w${weekSlug}.html`)}">Full trades report</a></p></section>`;
+    } else {
+      html += `<section id="trades-section"><h3>Trades</h3><p class="downloads-note">Trades data not present in manifest for Week ${esc(week)}.</p>${tradesDl.markup}</section>`;
+    }
+
+    html += `<p><a href="../.dash/index.html">All artifacts</a></p>`;
+
+    app.innerHTML = html;
+    attachSortHandlers();
+  }
+
+  function scheduleRender(){
+    renderAll().catch(() => {});
+  }
+
+  async function loadWeek(week){
+    if (!week) return;
+    state.week = week;
+    renderToken += 1;
+    const token = renderToken;
+    if (app) {
+      app.textContent = 'Loading…';
+    }
+    currentData = await fetchManifest(week);
+    fallbackMeta = await fetchFallbackMeta(week);
+    if (token !== renderToken) {
+      return;
+    }
+    updateProvenanceBadge(fallbackMeta, week);
+    updateButtons(state.pos);
+    await renderAll();
+    updateNavigator(week);
+  }
+
+  if (weekSelect) {
+    weekSelect.addEventListener('change', (event) => {
+      const value = Number(event.target.value);
+      if (!Number.isFinite(value) || value <= 0) {
+        return;
+      }
+      loadWeek(value);
+    });
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = btn.dataset.pos;
+      if (!next || next === state.pos) return;
+      state.pos = next;
+      updateButtons(next);
+      scheduleRender();
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(() => {
+      state.q = searchInput.value.trim().toLowerCase();
+      scheduleRender();
+    }, 150));
+  }
+
+  weeksIndex = await fetchWeeksIndex() || weeksIndex;
+  if (!weeksIndex.weeks.length) {
+    const fallback = await fetchLegacyLatest();
+    if (fallback) {
+      weeksIndex = { weeks: [fallback.week], latest: fallback.week };
+      manifestCache.set(fallback.week, fallback.data);
+    }
+  }
+
+  const initialWeek = weeksIndex.latest || weeksIndex.weeks[0] || null;
+  populateWeekSelect(weeksIndex.weeks, initialWeek);
+  updateNavigator(initialWeek ?? null);
+
+  if (initialWeek) {
+    await loadWeek(initialWeek);
+  } else if (app) {
+    app.textContent = 'No manifest found yet.';
+  }
+})();
+</script>

@@ -1,0 +1,88 @@
+{
+  "noise_sd": 0.12,
+  "playoff_slots": 4,
+  "runs": 5000,
+  "summary": [
+    {
+      "mean_remaining_wins": 1.0,
+      "mean_wins": 1.0,
+      "median_wins": 1.0,
+      "playoff_odds": 0.7938,
+      "team": "Le'Veon A Prayer",
+      "title_odds": 0.2
+    },
+    {
+      "mean_remaining_wins": 0.505,
+      "mean_wins": 0.505,
+      "median_wins": 1.0,
+      "playoff_odds": 0.4104,
+      "team": "To Infinity and Bijan",
+      "title_odds": 0.102
+    },
+    {
+      "mean_remaining_wins": 0.5094,
+      "mean_wins": 0.5094,
+      "median_wins": 1.0,
+      "playoff_odds": 0.4066,
+      "team": "Elijah Loves Tattoos",
+      "title_odds": 0.1014
+    },
+    {
+      "mean_remaining_wins": 0.4998,
+      "mean_wins": 0.4998,
+      "median_wins": 0.0,
+      "playoff_odds": 0.403,
+      "team": "Jason Schwartz's Best Team",
+      "title_odds": 0.1044
+    },
+    {
+      "mean_remaining_wins": 0.5002,
+      "mean_wins": 0.5002,
+      "median_wins": 1.0,
+      "playoff_odds": 0.401,
+      "team": "Gordon Rams Me",
+      "title_odds": 0.0974
+    },
+    {
+      "mean_remaining_wins": 0.495,
+      "mean_wins": 0.495,
+      "median_wins": 0.0,
+      "playoff_odds": 0.3994,
+      "team": "Supreme Leader Elijah Khamenei",
+      "title_odds": 0.1
+    },
+    {
+      "mean_remaining_wins": 0.5006,
+      "mean_wins": 0.5006,
+      "median_wins": 1.0,
+      "playoff_odds": 0.3962,
+      "team": "Javaris Jamarr Javarison-Lamar",
+      "title_odds": 0.098
+    },
+    {
+      "mean_remaining_wins": 0.4994,
+      "mean_wins": 0.4994,
+      "median_wins": 0.0,
+      "playoff_odds": 0.3952,
+      "team": "Michael\u2019S Useless Car Purchase",
+      "title_odds": 0.0984
+    },
+    {
+      "mean_remaining_wins": 0.4906,
+      "mean_wins": 0.4906,
+      "median_wins": 0.0,
+      "playoff_odds": 0.3944,
+      "team": "HAIL MARY",
+      "title_odds": 0.0984
+    },
+    {
+      "mean_remaining_wins": 0.0,
+      "mean_wins": 0.0,
+      "median_wins": 0.0,
+      "playoff_odds": 0.0,
+      "team": "Super Coopers",
+      "title_odds": 0.0
+    }
+  ],
+  "week": 4
+}

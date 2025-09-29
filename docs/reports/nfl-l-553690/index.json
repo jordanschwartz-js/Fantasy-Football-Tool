@@ -1,0 +1,22 @@
+{
+  "assistant": {
+    "1": "reports/nfl-l-553690/assistant_week_1.json",
+    "4": "reports/nfl-l-553690/assistant_week_4.json"
+  },
+  "bracket": {},
+  "changelog": {},
+  "latest": 4,
+  "name": "Nfl L 553690",
+  "path": {},
+  "sim": {
+    "1": "reports/nfl-l-553690/season_sim_week_1.json",
+    "4": "reports/nfl-l-553690/season_sim_week_4.json"
+  },
+  "slug": "nfl-l-553690",
+  "sos": {},
+  "targets": {},
+  "weeks": [
+    1,
+    4
+  ]
+}
