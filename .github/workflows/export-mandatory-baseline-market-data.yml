@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - research/mandatory-baseline-market-export
+  pull_request:
+    branches:
+      - research/mandatory-baseline-market-export-base
   workflow_dispatch:
 
 permissions:
