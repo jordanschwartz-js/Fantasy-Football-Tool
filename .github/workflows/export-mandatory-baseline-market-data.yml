@@ -1,0 +1,54 @@
+name: Export mandatory baseline market data
+
+on:
+  push:
+    branches:
+      - research/mandatory-baseline-market-export
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-market-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out export branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install export dependencies
+        run: >-
+          python -m pip install
+          pandas==2.3.3
+          pyarrow==21.0.0
+          requests==2.34.2
+
+      - name: Export pinned public inputs
+        run: >-
+          python research/export_mandatory_baseline_market_data.py
+          --output-dir build/mandatory-baseline-market-data
+
+      - name: Inspect export
+        run: |
+          find build/mandatory-baseline-market-data -maxdepth 1 -type f -print | sort
+          cat build/mandatory-baseline-market-data/source_manifest.csv
+          cat build/mandatory-baseline-market-data/stathead_historical_adp_coverage.json
+          cat build/mandatory-baseline-market-data/stathead_ffc_ppr_adp_coverage.json
+          cat build/mandatory-baseline-market-data/dynastyprocess_db_fpecr_coverage.json
+          du -sh build/mandatory-baseline-market-data
+
+      - name: Upload public market-data export
+        uses: actions/upload-artifact@v4
+        with:
+          name: mandatory-baseline-market-data
+          path: build/mandatory-baseline-market-data
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9
