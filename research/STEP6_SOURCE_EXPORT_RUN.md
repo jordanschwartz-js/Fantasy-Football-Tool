@@ -1,5 +1,5 @@
 # Step 6 source export run
 
-This temporary branch exists only to trigger the immutable 2026 public-source export workflow. Do not merge it.
+This temporary branch exists only to trigger the immutable 2026 public-source export workflows. Do not merge it.
 
-Rerun reason: freeze the source inventory after treating current ADP aliases as optional inventory paths.
+Rerun reason: freeze the current FantasyPros half-PPR projection/VBD table and Yahoo-specific ADP table.
