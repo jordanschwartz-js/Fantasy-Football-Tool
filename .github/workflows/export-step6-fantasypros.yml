@@ -1,0 +1,57 @@
+name: Export Step 6 FantasyPros tables
+
+on:
+  pull_request:
+    branches:
+      - research/step6-2026-source-export-base
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-fantasypros:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out export branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install parser dependencies
+        run: >-
+          python -m pip install
+          pandas==2.3.3
+          requests==2.34.2
+          lxml==6.0.2
+
+      - name: Freeze FantasyPros tables
+        run: >-
+          python research/export_step6_fantasypros.py
+          --output-dir build/step6-fantasypros
+
+      - name: Inspect frozen tables
+        run: |
+          cat build/step6-fantasypros/fantasypros_manifest.csv
+          python - <<'PY'
+          import pandas as pd
+          from pathlib import Path
+          for path in sorted(Path('build/step6-fantasypros').glob('*.csv')):
+              frame = pd.read_csv(path)
+              print(path, frame.shape)
+              print(frame.head(3).to_string(index=False))
+          PY
+
+      - name: Upload FantasyPros snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: step6-fantasypros-tables
+          path: build/step6-fantasypros
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9
