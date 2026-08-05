@@ -1,0 +1,49 @@
+name: Export Step 6 2026 public sources
+
+on:
+  pull_request:
+    branches:
+      - research/step6-2026-source-export-base
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-step6-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out export branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install exporter dependencies
+        run: python -m pip install pandas==2.3.3 requests==2.34.2
+
+      - name: Freeze public sources
+        run: >-
+          python research/export_step6_2026_sources.py
+          --output-dir build/step6-2026-sources
+
+      - name: Inspect frozen snapshot
+        run: |
+          cat build/step6-2026-sources/snapshot_summary.json
+          cat build/step6-2026-sources/source_manifest.csv
+          cat build/step6-2026-sources/json_validation.csv
+          find build/step6-2026-sources/raw -maxdepth 1 -type f -print | sort
+          du -sh build/step6-2026-sources
+
+      - name: Upload source snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: step6-2026-public-sources
+          path: build/step6-2026-sources
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9
