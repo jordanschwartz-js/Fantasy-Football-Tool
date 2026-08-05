@@ -2,4 +2,4 @@
 
 This temporary branch exists only to trigger the immutable 2026 public-source export workflow. Do not merge it.
 
-Rerun reason: freeze the source inventory after treating changing ADP aliases as optional.
+Rerun reason: freeze the source inventory after treating current ADP aliases as optional inventory paths.
