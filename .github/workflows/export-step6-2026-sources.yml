@@ -36,7 +36,11 @@ jobs:
           # Current StatHead commits can consolidate ADP aliases under different
           # filenames. Inventory them first; the private normalization pass sets
           # the actual coverage gate.
-          namespace["STATHEAD_FILES"]["public/data/redraft-adp-consensus.json"] = False
+          for path in (
+              "public/data/redraft-adp-consensus.json",
+              "public/data/sleeper_adp_ppr_2026.json",
+          ):
+              namespace["STATHEAD_FILES"][path] = False
           sys.argv = [
               "export_step6_2026_sources.py",
               "--output-dir",
