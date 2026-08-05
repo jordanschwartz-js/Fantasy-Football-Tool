@@ -18,6 +18,10 @@ import requests
 STATHEAD_COMMIT = "b29793b6776b30a0c8aba32aac5a607ae86a5b6d"
 STATHEAD_BASE = f"https://raw.githubusercontent.com/dachhack/stathead/{STATHEAD_COMMIT}/"
 
+# Only foundational files are required at download time. Source-level projection
+# aliases are inventoried as optional because StatHead's current build can rename
+# or consolidate them between commits. The private normalization pass applies the
+# real independent-source coverage gate after inspecting all downloaded schemas.
 STATHEAD_FILES: dict[str, bool] = {
     "public/data/projection-base-2026.json": True,
     "public/data/clay-projections-2026.json": False,
@@ -29,9 +33,9 @@ STATHEAD_FILES: dict[str, bool] = {
     "public/data/fp-season-projections-2026.json": False,
     "public/data/fp-season-projections-2026-raw.json": False,
     "public/data/rotowire-2026.json": False,
-    "public/data/espn-2026.json": True,
-    "public/data/cbs-2026.json": True,
-    "public/data/fftoday-2026.json": True,
+    "public/data/espn-2026.json": False,
+    "public/data/cbs-2026.json": False,
+    "public/data/fftoday-2026.json": False,
     "public/data/fanduel-nfl-2026.json": False,
     "public/data/fft-season-projections-2026.json": False,
     "public/data/nfl-projections-2026.json": False,
@@ -113,6 +117,8 @@ def download(
         "required": required,
         "source_url": stable_url(source_url),
         "retrieved_at": datetime.now(timezone.utc).isoformat(),
+        "local_path": "",
+        "error": "",
     }
     try:
         with session.get(source_url, timeout=(30, 240), stream=True) as response:
@@ -154,7 +160,7 @@ def download(
         return record
 
 
-def validate_json_files(output_dir: Path, manifest: pd.DataFrame) -> pd.DataFrame:
+def validate_json_files(manifest: pd.DataFrame) -> pd.DataFrame:
     records: list[dict[str, object]] = []
     for row in manifest.itertuples(index=False):
         if row.status != "downloaded" or not str(row.local_path).endswith(".json"):
@@ -163,13 +169,11 @@ def validate_json_files(output_dir: Path, manifest: pd.DataFrame) -> pd.DataFram
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
             shape = type(payload).__name__
-            if isinstance(payload, dict):
-                count = len(payload)
-            elif isinstance(payload, list):
+            if isinstance(payload, (dict, list)):
                 count = len(payload)
             else:
                 count = 1
-            records.append({"dataset": row.dataset, "status": "PASS", "json_shape": shape, "top_level_count": count})
+            records.append({"dataset": row.dataset, "status": "PASS", "json_shape": shape, "top_level_count": count, "error": ""})
         except Exception as exc:
             records.append({"dataset": row.dataset, "status": "FAIL", "json_shape": "", "top_level_count": 0, "error": str(exc)})
     return pd.DataFrame(records)
@@ -213,7 +217,7 @@ def main() -> None:
 
     manifest = pd.DataFrame(records)
     manifest.to_csv(output_dir / "source_manifest.csv", index=False)
-    validation = validate_json_files(output_dir, manifest)
+    validation = validate_json_files(manifest)
     validation.to_csv(output_dir / "json_validation.csv", index=False)
 
     downloaded = manifest[manifest["status"] == "downloaded"]
