@@ -2,4 +2,4 @@
 
 This temporary branch exists only to trigger the immutable 2026 public-source export workflow. Do not merge it.
 
-Rerun reason: inventory optional projection aliases before applying the independent-source gate.
+Rerun reason: freeze the source inventory after treating changing ADP aliases as optional.
