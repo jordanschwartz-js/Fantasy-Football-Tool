@@ -1,8 +1,7 @@
 """Freeze current FantasyPros half-PPR VBD projections and Yahoo ADP.
 
-The script saves raw HTML and a normalized table. It does not crawl linked pages
-or republish article text; it captures the structured player tables needed for
-private draft research.
+The script saves raw HTML and normalized tables when they are server rendered.
+Dynamic pages remain frozen with a diagnostic instead of failing the snapshot.
 """
 from __future__ import annotations
 
@@ -57,8 +56,6 @@ def select_table(tables: list[pd.DataFrame], required_tokens: tuple[str, ...]) -
 
 def clean_player(value: object) -> tuple[str, str]:
     text = re.sub(r"\s+", " ", str(value)).strip()
-    # The visible table commonly ends with TEAM (BYE). Keep a conservative
-    # parser and retain the unparsed field in the raw table as well.
     match = re.match(r"^(.*?)\s+([A-Z]{2,3})\s*\(\d+\)\s*$", text)
     if match:
         return match.group(1).strip(), match.group(2)
@@ -90,18 +87,41 @@ def main() -> None:
         html_path = output_dir / f"{dataset}.html"
         html_path.write_bytes(response.content)
         tables = pd.read_html(io.StringIO(response.text))
-        if dataset.endswith("vbd"):
-            frame = select_table(tables, ("player", "vbd", "vorp"))
-        else:
-            frame = select_table(tables, ("player", "yahoo", "avg"))
-        frame.to_csv(output_dir / f"{dataset}_raw_table.csv", index=False)
-
-        normalized = frame.copy()
-        player_col = next(column for column in normalized.columns if "player" in column.lower())
-        parsed = normalized[player_col].map(clean_player)
-        normalized.insert(0, "player_name", [item[0] for item in parsed])
-        normalized.insert(1, "team", [item[1] for item in parsed])
-        normalized.to_csv(output_dir / f"{dataset}.csv", index=False)
+        required_tokens = ("player", "vbd", "vorp") if dataset.endswith("vbd") else ("player", "yahoo", "avg")
+        try:
+            frame = select_table(tables, required_tokens)
+            parse_status = "parsed"
+            parse_error = ""
+            frame.to_csv(output_dir / f"{dataset}_raw_table.csv", index=False)
+            normalized = frame.copy()
+            player_col = next(column for column in normalized.columns if "player" in column.lower())
+            parsed = normalized[player_col].map(clean_player)
+            normalized.insert(0, "player_name", [item[0] for item in parsed])
+            normalized.insert(1, "team", [item[1] for item in parsed])
+            csv_path = output_dir / f"{dataset}.csv"
+            normalized.to_csv(csv_path, index=False)
+            rows = len(normalized)
+            columns = json.dumps(list(normalized.columns))
+            csv_sha = sha256(csv_path)
+        except Exception as exc:
+            parse_status = "dynamic_or_unmatched"
+            parse_error = f"{type(exc).__name__}: {exc}"
+            rows = 0
+            columns = json.dumps([list(flatten_columns(table).columns) for table in tables])
+            csv_sha = ""
+            (output_dir / f"{dataset}_parse_diagnostic.json").write_text(
+                json.dumps(
+                    {
+                        "status": parse_status,
+                        "error": parse_error,
+                        "tables": [list(flatten_columns(table).columns) for table in tables],
+                        "contains_bijan": "Bijan Robinson" in response.text,
+                        "contains_yahoo": "Yahoo" in response.text,
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
         manifest.append(
             {
                 "dataset": dataset,
@@ -112,9 +132,11 @@ def main() -> None:
                 "last_modified": response.headers.get("Last-Modified"),
                 "html_bytes": html_path.stat().st_size,
                 "html_sha256": sha256(html_path),
-                "rows": len(normalized),
-                "columns": json.dumps(list(normalized.columns)),
-                "csv_sha256": sha256(output_dir / f"{dataset}.csv"),
+                "parse_status": parse_status,
+                "parse_error": parse_error,
+                "rows": rows,
+                "columns": columns,
+                "csv_sha256": csv_sha,
             }
         )
 
